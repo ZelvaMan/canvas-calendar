@@ -22,7 +22,7 @@ export default {
       tcolor: "rgba(0, 0, 0, 0);"
     };
   },
-  prop: {
+  props: {
     startTime: String,
     endTime: String,
     //props: start end color
@@ -30,19 +30,18 @@ export default {
       type: Array
     }
   },
-  // mounted() {
-  //  console.log("mounted fired");
-  // this.generateDivs();
-  //  },
-  // beforeUpdated() {
-  // this.generateDivs();
-  // },
+  mounted() {
+    console.log("mounted fired");
+    console.log(this.startTime);
+  },
+  beforeUpdated() {
+    console.log("bupdate fired");
+  },
 
   computed: {
     divsComputed() {
       console.log("generating divs ...");
-      console.log(this);
-      console.log(this.$attrs.events);
+      console.log(this.events);
 
       var startHour = moment(this.startTime).format("h");
       var endHour = moment(this.endTime).format("h");
@@ -57,7 +56,7 @@ export default {
       if (this.events != undefined) {
         divs = [];
 
-        this.events.foreach(e => {
+        this.events.forEach(e => {
           var eStart = {
             hour: moment(e.start).format("h"),
             minute: moment(e.start).format("mm")
@@ -86,7 +85,9 @@ export default {
 
       console.log(this.divs);
       return divs;
-    },
+    }
+  },
+  methods: {
     minToQuarter(minute) {
       return Math.ceil(minute / 10);
     }
