@@ -11,8 +11,13 @@
       </div>
       <div class="flex-possision-collumb">
         <div class="resource-name">pizza</div>
-        <div class="line-container">x</div>
-        <div class="line-container">x</div>
+        <div class="line-container">
+          <resourceLine startTime="10:00" endTime="20:00" :events="this.events1"></resourceLine>
+          <!-- <resourceLine startTime="10:00" endTime="20:00" :events="this.events2"></resourceLine> -->
+        </div>
+        <div class="line-container">
+          <div class="line-container"></div>
+        </div>
         <div class="line-container">x</div>
         <div class="line-container">x</div>
         <div class="line-container">x</div>
@@ -54,8 +59,26 @@
 </template>
 
 <script>
+import resourceLine from "./ResourceLine.vue";
 export default {
-  name: "WeekOverview"
+  name: "WeekOverview",
+  components: {
+    resourceLine
+  },
+  props: {
+    startTime: String,
+    endTime: String,
+    events: Array
+  },
+  data() {
+    return {
+      events1: [{ start: "10:00", end: "20:00", color: "black" }],
+      events2: [
+        { start: "10:00", end: "15:00", color: "black" },
+        { start: "15:00", end: "20:00", color: "black" }
+      ]
+    };
+  }
 };
 </script>
 
@@ -93,15 +116,25 @@ export default {
   height: 20%;
   margin: 5px;
 }
-.line-container {
-  margin: 5px;
-  background: black;
-  height: 20%;
-  min-width: 40px;
-}
 .resource-name {
   height: 25px;
   margin: 5px;
   min-width: 40px;
+}
+
+.line-container {
+  margin: 5px;
+  height: 20%;
+  min-width: 40px;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+}
+
+.red {
+  background: red;
+}
+.blue {
+  background: blue;
 }
 </style>
