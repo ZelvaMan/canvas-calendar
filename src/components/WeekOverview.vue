@@ -72,7 +72,7 @@ export default {
   },
   data() {
     return {
-      events1: [{ start: "10:00", end: "20:00", color: "black" }],
+      events1: [{ start: "10:00", end: "20:00", color: "red" }],
       events2: [
         { start: "10:00", end: "15:00", color: "black" },
         { start: "15:00", end: "20:00", color: "black" }
