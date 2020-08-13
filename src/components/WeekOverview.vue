@@ -11,13 +11,9 @@
       </div>
       <div class="flex-possision-collumb">
         <div class="resource-name">pizza</div>
-        <div class="line-container">
-          <resourceLine startTime="10:00" endTime="20:00" :events="this.events1"></resourceLine>
-          <!-- <resourceLine startTime="10:00" endTime="20:00" :events="this.events2"></resourceLine> -->
-        </div>
-        <div class="line-container">
-          <div class="line-container"></div>
-        </div>
+        <LineContainer :events="events2" startTime="10:00" endTime="20:00"></LineContainer>
+
+        <div class="line-container">x</div>
         <div class="line-container">x</div>
         <div class="line-container">x</div>
         <div class="line-container">x</div>
@@ -59,11 +55,11 @@
 </template>
 
 <script>
-import resourceLine from "./ResourceLine.vue";
+import LineContainer from "./LineContainer.vue";
 export default {
   name: "WeekOverview",
   components: {
-    resourceLine
+    LineContainer
   },
   props: {
     startTime: String,
@@ -74,8 +70,10 @@ export default {
     return {
       events1: [{ start: "10:00", end: "20:00", color: "red" }],
       events2: [
-        { start: "10:00", end: "15:00", color: "black" },
-        { start: "15:00", end: "20:00", color: "black" }
+        { start: "10:00", end: "14:00", color: "blue", resource: "A" },
+        { start: "15:00", end: "18:00", color: "blue", resource: "A" },
+        { start: "10:00", end: "17:00", color: "red", resource: "B" },
+        { start: "18:00", end: "20:00", color: "red", resource: "B" }
       ]
     };
   }
