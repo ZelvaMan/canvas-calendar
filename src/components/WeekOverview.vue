@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="flex-container">
-      <div class="flex-dates-collumb">
+      <div class="flex-dates-collumn">
         <div style="height:25px; ">x</div>
         <div class="date">1.1</div>
         <div class="date">1.2</div>
@@ -9,24 +9,23 @@
         <div class="date">1.4</div>
         <div class="date">1.5</div>
       </div>
-      <div class="flex-possision-collumb">
+      <div class="flex-possision-collumn">
         <div class="resource-name">pizza</div>
-        <LineContainer :events="events2" startTime="10:00" endTime="20:00"></LineContainer>
 
         <div class="line-container">x</div>
         <div class="line-container">x</div>
         <div class="line-container">x</div>
         <div class="line-container">x</div>
-      </div>
-      <div class="flex-possision-collumb">
-        <div class="resource-name">KP</div>
-        <div class="line-container">x</div>
-        <div class="line-container">x</div>
-        <div class="line-container">x</div>
-        <div class="line-container">x</div>
         <div class="line-container">x</div>
       </div>
-      <div class="flex-possision-collumb">
+      <PossisionCollumn
+        possision="KP"
+        startTime="10:00"
+        endTime="20:00"
+        :events="events2"
+        beginningDate="	2020-08-10"
+      ></PossisionCollumn>
+      <div class="flex-possision-collumn">
         <div class="resource-name">bar</div>
         <div class="line-container">x</div>
         <div class="line-container">x</div>
@@ -34,7 +33,7 @@
         <div class="line-container">x</div>
         <div class="line-container">x</div>
       </div>
-      <div class="flex-possision-collumb">
+      <div class="flex-possision-collumn">
         <div class="resource-name">servis</div>
         <div class="line-container">x</div>
         <div class="line-container">x</div>
@@ -42,7 +41,7 @@
         <div class="line-container">x</div>
         <div class="line-container">x</div>
       </div>
-      <div class="flex-possision-collumb">
+      <div class="flex-possision-collumn">
         <div class="resource-name">uklid</div>
         <div class="line-container">x</div>
         <div class="line-container">x</div>
@@ -55,25 +54,65 @@
 </template>
 
 <script>
-import LineContainer from "./LineContainer.vue";
+import PossisionCollumn from "./PossisionCollumn.vue";
 export default {
   name: "WeekOverview",
   components: {
-    LineContainer
+    PossisionCollumn
   },
   props: {
     startTime: String,
     endTime: String,
-    events: Array
+    events: Array,
+    weekDateStart: String
   },
   data() {
     return {
       events1: [{ start: "10:00", end: "20:00", color: "red" }],
       events2: [
-        { start: "10:00", end: "14:00", color: "blue", resource: "A" },
-        { start: "15:00", end: "18:00", color: "blue", resource: "A" },
-        { start: "10:00", end: "17:00", color: "red", resource: "B" },
-        { start: "18:00", end: "20:00", color: "red", resource: "B" }
+        {
+          start: "	2020-08-13 10:00 ",
+          end: "14:00",
+          color: "blue",
+          resource: "A"
+        },
+        {
+          start: " 	2020-08-13 15:00",
+          end: "18:00",
+          color: "blue",
+          resource: "A"
+        },
+        {
+          start: " 	2020-08-13 10:00",
+          end: "17:00",
+          color: "red",
+          resource: "B"
+        },
+        {
+          start: "	2020-08-13 18:00",
+          end: "20:00",
+          color: "red",
+          resource: "B"
+        },
+        {
+          start: "	2020-08-14 10:00 ",
+          end: "14:00",
+          color: "blue",
+          resource: "A"
+        },
+        {
+          start: " 	2020-08-12 15:00",
+          end: "18:00",
+          color: "blue",
+          resource: "A"
+        },
+        {
+          start: " 	2020-08-15 10:00",
+          end: "17:00",
+          color: "red",
+          resource: "B"
+        },
+        { start: "	2020-08-12 18:00", end: "20:00", color: "red", resource: "B" }
       ]
     };
   }
@@ -92,7 +131,7 @@ export default {
   height: 100%;
   flex-wrap: nowrap;
 }
-.flex-dates-collumb {
+.flex-dates-collumn {
   width: auto;
   display: flex;
   flex-direction: column;
@@ -101,7 +140,7 @@ export default {
   border: 1px black;
   height: 100%;
 }
-.flex-possision-collumb {
+.flex-possision-collumn {
   width: auto;
   display: flex;
   flex-direction: column;
