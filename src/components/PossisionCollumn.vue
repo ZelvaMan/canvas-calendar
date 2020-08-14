@@ -1,7 +1,7 @@
 <template>
   <div class="flex-possision-collumn">
     <div class="resource-name">{{this.possision}}</div>
-    <LineContainer :startTime="startTime" :endTime="endTime"></LineContainer>
+    <LineContainer :startTime="startTime" :endTime="endTime" v-for="date in eventsGroupedByDay" v-bind:key="date.date" :events="date.events"></LineContainer>
   </div>
 </template>
 <script>
@@ -42,8 +42,8 @@ export default {
         .value();
       var cdate = moment(this.beginningDate).format("MM.DD.");
       for (let i = 0; i < 5; i++) {
-        var d;
-        if ((d = this.haveDate(byDate, cdate) != undefined)) {
+        var d= this.haveDate(byDate, cdate);
+        if ((d  != undefined)) {
           console.log("havedate tru result");
           console.log(this.haveDate(byDate, cdate));
           result.push(d);
@@ -66,8 +66,7 @@ export default {
       var r = undefined;
       array.forEach(d => {
         if (d.date == tdate) {
-          console.log("have date true");
-          console.log(d);
+
           r = d;
           return;
         }
@@ -90,4 +89,10 @@ export default {
   float: right;
   min-width: 40px;
 }
+.resource-name {
+  height: 25px;
+  margin: 5px;
+  min-width: 40px;
+}
+
 </style>
