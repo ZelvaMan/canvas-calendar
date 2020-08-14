@@ -31,6 +31,9 @@ export default {
   },
   computed: {
     divsComputed() {
+      console.log("COMPUTING DIVS...")
+      console.log(this.startTime)
+      console.log(this.events)
       var startHour = moment(this.startTime, "hh:mm").format("HH");
       var endHour = moment(this.endTime, "hh:mm").format("HH");
       var hours = 24 - startHour - (24 - endHour);
@@ -45,17 +48,15 @@ export default {
         divs = [];
 
         this.events.forEach(e => {
-          console.log("event forEach");
-          console.log("last ev end" + lastEventEnd);
+         
           var eStart = {
-            hour: moment(e.start, "hh:mm").format("HH"),
-            minute: moment(e.start, "hh:mm").format("mm")
+            hour: moment(e.start, "YYYY-MM-DD hh:mm").format("HH"),
+            minute: moment(e.start, "YYYY-MM-DD hh:mm").format("mm")
           };
           var eEnd = {
             hour: moment(e.end, "hh:mm").format("HH"),
             minute: moment(e.end, "hh:mm").format("mm")
           };
-          console.log("estart" + eStart.hour);
           //fill blank space between last event end and this event start
           var blankDiv = {
             color: this.tcolor,
@@ -70,9 +71,16 @@ export default {
           // this.minToQuarter(eStart.minute) * pPQuarter +
           // this.minToQuarter(eEnd.minute) * pPQuarter;
           var eDiv = { color: e.color, height: Math.round(divHeigh), id: ++id };
-          divs.push(eDiv);
+          console.log("event")
+          console.log(e);
+          console.log(eStart)
+          console.log(eEnd)
+          console.log("hivheight" +eDiv.height)
+          divs.push( eDiv);
           lastEventEnd = eEnd.hour;
         });
+        console.log(divs)
+         console.log("-----------------------------------------")
       }
 
       console.log(this.divs);
@@ -85,7 +93,6 @@ export default {
     },
     createStyleString(div) {
       var v = "height:" + div.height + "%; background:" + div.color + ";";
-      console.log(v);
       return v;
     }
   }
