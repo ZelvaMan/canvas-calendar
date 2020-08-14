@@ -44,19 +44,14 @@ export default {
       for (let i = 0; i < 5; i++) {
         var d= this.haveDate(byDate, cdate);
         if ((d  != undefined)) {
-          console.log("havedate tru result");
-          console.log(this.haveDate(byDate, cdate));
           result.push(d);
         } else {
           result.push({ date: cdate, events: [] });
         }
-        console.log(d);
-        console.log(cdate);
         cdate = moment(cdate)
           .add(1, "d")
           .format("MM.DD.");
       }
-      console.log(events);
       return result;
     }
   },
