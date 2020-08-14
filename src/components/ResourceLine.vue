@@ -31,9 +31,6 @@ export default {
   },
   computed: {
     divsComputed() {
-      console.log("COMPUTING DIVS...")
-      console.log(this.startTime)
-      console.log(this.events)
       var startHour = moment(this.startTime, "hh:mm").format("HH");
       var endHour = moment(this.endTime, "hh:mm").format("HH");
       var hours = 24 - startHour - (24 - endHour);
@@ -48,7 +45,6 @@ export default {
         divs = [];
 
         this.events.forEach(e => {
-         
           var eStart = {
             hour: moment(e.start, "YYYY-MM-DD hh:mm").format("HH"),
             minute: moment(e.start, "YYYY-MM-DD hh:mm").format("mm")
@@ -63,7 +59,7 @@ export default {
             height: (eStart.hour - lastEventEnd) * pPHour,
             id: ++id
           };
-          console.log("blank height" + blankDiv.height);
+
           divs.push(blankDiv);
           // add line
           var divHeigh = (eEnd.hour - eStart.hour) * pPHour;
@@ -71,19 +67,12 @@ export default {
           // this.minToQuarter(eStart.minute) * pPQuarter +
           // this.minToQuarter(eEnd.minute) * pPQuarter;
           var eDiv = { color: e.color, height: Math.round(divHeigh), id: ++id };
-          console.log("event")
-          console.log(e);
-          console.log(eStart)
-          console.log(eEnd)
-          console.log("hivheight" +eDiv.height)
-          divs.push( eDiv);
+
+          divs.push(eDiv);
           lastEventEnd = eEnd.hour;
         });
-        console.log(divs)
-         console.log("-----------------------------------------")
       }
 
-      console.log(this.divs);
       return divs;
     }
   },
@@ -101,7 +90,7 @@ export default {
 
 <style scoped>
 .resource-line {
-  margin-left: 5px;
+  margin-left: 3px;
   width: 5px;
   height: 100%;
   display: flex;

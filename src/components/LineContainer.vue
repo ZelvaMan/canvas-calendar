@@ -40,24 +40,24 @@ export default {
         // `key` is group's name (color), `value` is the array of objects
         .map((value, key) => ({ resource: key, events: value }))
         .value();
-
+      result = _.sortBy(result, "resource");
       return result;
     }
   },
   created() {},
-  mounted() {
-    console.log(this.sortedByResource);
-  }
+  mounted() {}
 };
 </script>
 
 <style scoped>
 .line-container {
-  margin: 5px;
+  padding: 5px;
   height: 20%;
   min-width: 40px;
   display: flex;
   flex-wrap: nowrap;
   flex-direction: row;
+
+  border-top: 1.5px solid rgb(0, 0, 0, 0.4);
 }
 </style>
