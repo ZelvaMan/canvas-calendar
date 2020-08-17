@@ -62,7 +62,7 @@ export default {
     onSpace(e) {
       e.preventDefault();
       e.target.value += "\n";
-      e.target.clientHeight = e.target.rows * (1.1 * e.target.fontSize);
+      e.target.sty = e.target.rows * (1.1 * e.target.fontSize);
       console.log(e.target.clientHeight);
     }
   },

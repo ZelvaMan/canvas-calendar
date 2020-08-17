@@ -6,7 +6,7 @@
     </h3>
     <div class="flex-container">
       <WeekOverview startTime="10:00" endTime="20:00" :events="events" weekDateStart="2020-08-10" />
-      <EventCreator :resourceInfo="this.resourceInfo" daysOfWeek="5" v-on:input="addEvent"></EventCreator>
+      <EventCreator daysOfWeek="5" v-on:input="addEvent"></EventCreator>
     </div>
   </div>
 </template>
@@ -23,13 +23,7 @@ export default {
   },
   data() {
     return {
-      events: [],
-      resourceInfo: {
-        color: "yellow",
-        name: "Ozias",
-        id: "Ozias",
-        possision: "KP"
-      }
+      events: []
     };
   },
   methods: {
