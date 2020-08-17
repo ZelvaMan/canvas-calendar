@@ -53,6 +53,8 @@ export default {
             hour: moment(e.end, "hh:mm").format("HH"),
             minute: moment(e.end, "hh:mm").format("mm")
           };
+          if (eStart.hour < startHour) eStart.hour = startHour;
+          if (eEnd.hour > endHour) eEnd.hour = endHour;
           //fill blank space between last event end and this event start
           var blankDiv = {
             color: this.tcolor,

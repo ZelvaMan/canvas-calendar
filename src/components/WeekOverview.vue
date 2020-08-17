@@ -70,11 +70,12 @@ export default {
   display: flex;
   justify-content: flex-start;
   flex-direction: row;
-  width: 100%;
+  width: auto;
   height: 100%;
   flex-wrap: nowrap;
   border-style: solid;
   border-width: 2px;
+  margin-right: 10px;
 }
 .flex-dates-collumn {
   width: auto;

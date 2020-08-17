@@ -4,22 +4,39 @@
     <h3>
       <a href="https://github.com/ZelvaMan/canvas-calendar">Git hub</a>
     </h3>
-    <WeekOverview startTime="10:00" endTime="20:00" :events="events" weekDateStart="2020-08-10" />
+    <div class="flex-container">
+      <WeekOverview startTime="10:00" endTime="20:00" :events="events" weekDateStart="2020-08-10" />
+      <EventCreator :resourceInfo="this.resourceInfo" daysOfWeek="5" v-on:input="addEvent"></EventCreator>
+    </div>
   </div>
 </template>
 
 <script>
 import WeekOverview from "./components/WeekOverview.vue";
-import { eventsData } from "./data/events.js";
+import EventCreator from "./components/EventCreator";
+//import { eventsData } from "./data/events.js";
 export default {
   name: "App",
   components: {
-    WeekOverview
+    WeekOverview,
+    EventCreator
   },
   data() {
     return {
-      events: eventsData
+      events: [],
+      resourceInfo: {
+        color: "yellow",
+        name: "Ozias",
+        id: "Ozias",
+        possision: "KP"
+      }
     };
+  },
+  methods: {
+    addEvent(event) {
+      console.log(event);
+      this.events.push(event);
+    }
   }
 };
 </script>
@@ -33,5 +50,11 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
   height: 100%;
+}
+.flex-container {
+  flex-direction: row;
+
+  height: 100%;
+  display: flex;
 }
 </style>
