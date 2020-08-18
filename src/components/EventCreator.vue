@@ -1,28 +1,22 @@
 <template>
   <div class="container">
     <EventCreatorLine
-      :resourceInfo="resourceInfo"
+      v-for="ri in resourceInfos"
+      :key="ri.id"
+      :events="getResourceInfo(ri.id)"
+      :resourceInfo="ri"
       :daysOfWeek="daysOfWeek"
-      weekDateStart="2020-08-10"
-      v-on:input="onInput"
-    ></EventCreatorLine>
-    <EventCreatorLine
-      :resourceInfo="resourceInfo2"
-      :daysOfWeek="daysOfWeek"
-      weekDateStart="2020-08-10"
-      v-on:input="onInput"
-    ></EventCreatorLine>
-
-    <EventCreatorLine
-      :resourceInfo="resourceInfo3"
-      :daysOfWeek="daysOfWeek"
-      weekDateStart="2020-08-10"
+      :weekDateStart="startDate"
       v-on:input="onInput"
     ></EventCreatorLine>
   </div>
 </template>
 
 <script>
+import _ from "lodash";
+import Vue from "vue";
+//import moment from "moment";
+Object.defineProperty(Vue.prototype, "$_", { value: _ });
 import EventCreatorLine from "./EventCreatorLine";
 export default {
   name: "EventCreator",
@@ -30,29 +24,13 @@ export default {
     EventCreatorLine
   },
   data() {
-    return {
-      resourceInfo: {
-        color: "blue",
-        name: "Ozias",
-        id: "Ozias",
-        possision: "KP"
-      },
-      resourceInfo2: {
-        color: "red",
-        name: "Adam",
-        id: "Adam",
-        possision: "Pizza"
-      },
-      resourceInfo3: {
-        color: "green",
-        name: "Jakub",
-        id: "Jakub",
-        possision: "Uklid"
-      }
-    };
+    return {};
   },
   props: {
-    daysOfWeek: String
+    daysOfWeek: String,
+    startDate: String,
+    events: Array,
+    resourceInfos: Array
   },
   mounted() {
     console.log(this.resourceInfo);
@@ -60,6 +38,22 @@ export default {
   methods: {
     onInput(e) {
       this.$emit("input", e);
+    },
+    getResourceInfo(resource) {
+      var res = null;
+      this.resourceInfos.forEach(rs => {
+        if (rs.id == resource) res = rs;
+      });
+      return res;
+    },
+
+    getEventWithResource(resource) {
+      var result = [];
+      this.events.forEach(e => {
+        if (e.resource == resource) result.push(e);
+      });
+
+      return result;
     }
   }
 };

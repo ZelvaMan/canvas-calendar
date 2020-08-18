@@ -442,37 +442,37 @@ export const dummyEventsForEventCreator = [
   }, {
     start: "	2020-08-11 10:00 ",
     end: "14:00",
-    color: "blue",
+    color: "red",
     resource: "A",
     possision: "Pizza"
   }, {
     start: "	2020-08-12 10:00 ",
     end: "14:00",
-    color: "blue",
+    color: "red",
     resource: "A",
     possision: "Pizza"
   }, {
     start: "	2020-08-13 10:00 ",
     end: "14:00",
-    color: "blue",
+    color: "red",
     resource: "A",
     possision: "Pizza"
   }, {
-    start: "	2020-08-13 10:00 ",
+    start: "	2020-08-14 10:00 ",
     end: "14:00",
-    color: "blue",
+    color: "red",
     resource: "A",
     possision: "Pizza"
   }, {
-    start: "	2020-08-13 10:00 ",
+    start: "	2020-08-15 10:00 ",
     end: "14:00",
-    color: "blue",
+    color: "red",
     resource: "A",
     possision: "Pizza"
   }, {
-    start: "	2020-08-13 10:00 ",
+    start: "	2020-08-16 10:00 ",
     end: "14:00",
-    color: "blue",
+    color: "red",
     resource: "A",
     possision: "Pizza"
   },
@@ -502,19 +502,19 @@ export const dummyEventsForEventCreator = [
     resource: "B",
     possision: "KP"
   }, {
-    start: "	2020-08-13 10:00 ",
+    start: "	2020-08-14 10:00 ",
     end: "14:00",
     color: "blue",
     resource: "B",
     possision: "KP"
   }, {
-    start: "	2020-08-13 10:00 ",
+    start: "	2020-08-15 10:00 ",
     end: "14:00",
     color: "blue",
     resource: "B",
     possision: "KP"
   }, {
-    start: "	2020-08-13 10:00 ",
+    start: "	2020-08-16 10:00 ",
     end: "14:00",
     color: "blue",
     resource: "B",
