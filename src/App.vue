@@ -14,7 +14,7 @@
 <script>
 import WeekOverview from "./components/WeekOverview.vue";
 import EventCreator from "./components/EventCreator";
-//import { eventsData } from "./data/events.js";
+import { eventsData } from "./data/events.js";
 export default {
   name: "App",
   components: {
@@ -23,13 +23,26 @@ export default {
   },
   data() {
     return {
-      events: []
+      dummyEvents: eventsData,
+      eventCreatorEvents: [],
+      dummyEventsBool: true
     };
   },
   methods: {
     addEvent(event) {
       console.log(event);
-      this.events.push(event);
+      this.eventCreatorEvents = this.eventCreatorEvents.concat(event);
+    }
+  },
+  computed: {
+    events() {
+      var events = [];
+      if (this.dummyEventsBool) {
+        events = this.dummyEvents.concat(this.eventCreatorEvents);
+      } else {
+        events = this.eventCreatorEvents;
+      }
+      return events;
     }
   }
 };

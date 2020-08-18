@@ -57,7 +57,7 @@ export default {
         // `key` is group's name (color), `value` is the array of objects
         .map((value, key) => ({ possision: key, events: value }))
         .value();
-      console;
+      console.log("grouped by possision");
       console.log(result);
       return result;
     }

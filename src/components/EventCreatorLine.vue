@@ -11,8 +11,9 @@
         :id="   n+ '-' +resourceInfo.id "
         type="text"
         :style="inputDynamicStyle"
-        v-on:change="onInput"
+        v-on:change="onChange"
         v-on:keyup.space="onSpace"
+        oninput="this.style.height = '';this.style.height = this.scrollHeight + 'px'"
       />
     </div>
   </div>
@@ -29,16 +30,53 @@ export default {
     weekDateStart: String
   },
   methods: {
-    onInput(event) {
-      var date = moment(this.weekDateStart, "YYYY-MM-DD").add(
-        event.target.id[0] - 1,
-        "d"
-      );
-      var times = this.parseTimes(event.target.value);
+    onChange(event) {
+      this.onChangeHandler(event.target);
+    },
+    onChangeHandler(target) {
+      console.log("Change trigered s:" + target.value);
+      if (target.value.replace(/' '|\n/g, "").lenght < 3) {
+        return;
+      }
+      var spl = target.value.split("\n");
+      var id = target.id[0];
+      var events = [];
+      var sIfError = "";
+      var error = false;
+      spl.forEach(s => {
+        var e = this.createEvent(s, id);
+        console.log("e");
+        console.log(e);
+        //if error in crearing event ( propablly parsing)
+        if (e == null) {
+          error = true;
+        } else {
+          events.push(e);
 
-      if (times.start > times.end) {
-        event.target.value = "";
+          sIfError += s + "\n";
+        }
+      });
+      console.log(events);
+      if (error == true) {
+        console.log("error ");
+        target.value = sIfError;
+
+        this.$emit("input", events);
+
+        console.log("events emit");
+        console.log(events);
       } else {
+        console.log("events emit");
+        console.log(events);
+        this.$emit("input", events);
+      }
+    },
+
+    createEvent(string, id) {
+      var date = moment(this.weekDateStart, "YYYY-MM-DD").add(id - 1, "d");
+      var times = this.parseTimes(event.target.value);
+      var result = null;
+      if (!(times.start > times.end)) {
         var eventObject = {
           start: date.format("YYYY-MM-DD") + " " + times.start,
           end: times.end,
@@ -46,8 +84,18 @@ export default {
           resource: this.resourceInfo.id,
           possision: this.resourceInfo.possision
         };
-        this.$emit("input", eventObject);
+        result = eventObject;
+      } else {
+        result = null;
+        console.log("ERROR: start > end");
       }
+      if (string == " " || string == "") {
+        result = null;
+        ("ERROR");
+      }
+      console.log("result");
+      console.log(result);
+      return result;
     },
     parseTimes(string) {
       var result = { start: "", end: "" };
@@ -62,8 +110,7 @@ export default {
     onSpace(e) {
       e.preventDefault();
       e.target.value += "\n";
-      e.target.sty = e.target.rows * (1.1 * e.target.fontSize);
-      console.log(e.target.clientHeight);
+      this.onChangeHandler(e.target);
     }
   },
   computed: {
