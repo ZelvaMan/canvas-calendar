@@ -31,6 +31,7 @@ export default {
   props: {
     //  must contain name color id and default possision
     resourceInfo: Object,
+    events: Array,
     daysOfWeek: String,
     weekDateStart: String
   },
