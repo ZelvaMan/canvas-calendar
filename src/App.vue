@@ -29,9 +29,9 @@ export default {
     };
   },
   methods: {
-    addEvent(event) {
-      console.log(event);
-      this.eventCreatorEvents = this.eventCreatorEvents.concat(event);
+    addEvent(events) {
+      console.log(events);
+      this.eventCreatorEvents = events;
     }
   },
   computed: {

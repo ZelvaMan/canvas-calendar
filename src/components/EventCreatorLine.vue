@@ -23,6 +23,11 @@
 import moment from "moment";
 export default {
   name: "EventCreatorLine",
+  data() {
+    return {
+      eventsByDay: []
+    };
+  },
   props: {
     //  must contain name color id and default possision
     resourceInfo: Object,
@@ -43,8 +48,8 @@ export default {
       var events = [];
       var sIfError = "";
       var error = false;
-      spl.forEach(s => {
-        var e = this.createEvent(s, id);
+      spl.forEach((s, i) => {
+        var e = this.createEvent(spl[i], id);
         console.log("e");
         console.log(e);
         //if error in crearing event ( propablly parsing)
@@ -60,21 +65,15 @@ export default {
       if (error == true) {
         console.log("error ");
         target.value = sIfError;
-
-        this.$emit("input", events);
-
-        console.log("events emit");
-        console.log(events);
-      } else {
-        console.log("events emit");
-        console.log(events);
-        this.$emit("input", events);
       }
+      //
+      this.eventsByDay[id] = events;
+      this.emit();
     },
 
     createEvent(string, id) {
       var date = moment(this.weekDateStart, "YYYY-MM-DD").add(id - 1, "d");
-      var times = this.parseTimes(event.target.value);
+      var times = this.parseTimes(string);
       var result = null;
       if (!(times.start > times.end)) {
         var eventObject = {
@@ -87,7 +86,6 @@ export default {
         result = eventObject;
       } else {
         result = null;
-        console.log("ERROR: start > end");
       }
       if (string == " " || string == "") {
         result = null;
@@ -98,6 +96,7 @@ export default {
       return result;
     },
     parseTimes(string) {
+      console.log(string);
       var result = { start: "", end: "" };
       var splitted = string.split("-");
       //start
@@ -111,6 +110,18 @@ export default {
       e.preventDefault();
       e.target.value += "\n";
       this.onChangeHandler(e.target);
+    },
+    emit() {
+      console.log("emitting ");
+      console.log(this.eventsToEmit());
+      this.$emit("input", this.eventsToEmit());
+    },
+    eventsToEmit() {
+      var result = [];
+      this.eventsByDay.forEach(events => {
+        result = result.concat(events);
+      });
+      return result;
     }
   },
   computed: {
