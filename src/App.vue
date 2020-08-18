@@ -6,7 +6,13 @@
     </h3>
     <div class="flex-container">
       <WeekOverview startTime="10:00" endTime="20:00" :events="events" weekDateStart="2020-08-10" />
-      <EventCreator daysOfWeek="5" v-on:input="addEvent"></EventCreator>
+      <EventCreator
+        daysOfWeek="5"
+        v-on:input="addEvent"
+        :events="EventCreatorData.events"
+        :resourceInfos="EventCreatorData.resourceInfo"
+        StartDate="2020-08-10"
+      ></EventCreator>
     </div>
   </div>
 </template>
@@ -14,7 +20,11 @@
 <script>
 import WeekOverview from "./components/WeekOverview.vue";
 import EventCreator from "./components/EventCreator";
-import { eventsData } from "./data/events.js";
+import {
+  dummyEventsForRenderTest,
+  dummyEventsForEventCreator,
+  dummyResourceInfoForEventCreator
+} from "./data/DummyData.js";
 export default {
   name: "App",
   components: {
@@ -23,7 +33,11 @@ export default {
   },
   data() {
     return {
-      dummyEvents: eventsData,
+      EventsForRenderTest: dummyEventsForRenderTest,
+      EventCreatorData: {
+        events: dummyEventsForEventCreator,
+        resourceInfo: dummyResourceInfoForEventCreator
+      },
       eventCreatorEvents: [],
       dummyEventsBool: true
     };
@@ -38,12 +52,15 @@ export default {
     events() {
       var events = [];
       if (this.dummyEventsBool) {
-        events = this.dummyEvents.concat(this.eventCreatorEvents);
+        events = this.EventCreatorData.events.concat(this.eventCreatorEvents);
       } else {
         events = this.eventCreatorEvents;
       }
       return events;
     }
+  },
+  mounted() {
+    console.log(this.data);
   }
 };
 </script>
