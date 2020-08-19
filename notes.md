@@ -4,7 +4,7 @@
 - ability to have endtime after midnight 
 
 ## todo  EventCreaetor
+- automatic render EventCreatorLine for every resource info 
+- !!add collumns 
 - abbility to add to diferent possision that default 
 - fix dulpitation issues, also delete event if it is no longer written
-- automatic render EventCreatorLine for every resource info 
-- add collumns

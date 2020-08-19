@@ -24,8 +24,8 @@
       v-for="e in eventsGroupByPossision"
       :key="e.possision"
       :possision="e.possision"
-      startTime="10:00"
-      endTime="20:00"
+      :startTime="startTime"
+      :endTime="endTime"
       :events="e.events"
       beginningDate="	2020-08-10"
     ></PossisionCollumn>

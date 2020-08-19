@@ -5,13 +5,18 @@
       <a href="https://github.com/ZelvaMan/canvas-calendar">Git hub</a>
     </h3>
     <div class="flex-container">
-      <WeekOverview startTime="10:00" endTime="20:00" :events="events" weekDateStart="2020-08-10" />
+      <WeekOverview
+        :startTime="startTime"
+        :endTime="endTime"
+        :events="events"
+        weekDateStart="2020-08-10"
+      />
       <EventCreator
         daysOfWeek="5"
         v-on:input="addEvent"
-        :events="EventCreatorData.events"
+        :events="events"
         :resourceInfos="EventCreatorData.resourceInfo"
-        StartDate="2020-08-10"
+        startDate="2020-08-10"
       ></EventCreator>
     </div>
   </div>
@@ -39,28 +44,21 @@ export default {
         resourceInfo: dummyResourceInfoForEventCreator
       },
       eventCreatorEvents: [],
-      dummyEventsBool: true
+      dummyEventsBool: true,
+      events: [],
+      startTime: "8:00",
+      endTime: "22:00"
     };
   },
   methods: {
     addEvent(events) {
       console.log(events);
-      this.eventCreatorEvents = events;
-    }
-  },
-  computed: {
-    events() {
-      var events = [];
-      if (this.dummyEventsBool) {
-        events = this.EventCreatorData.events.concat(this.eventCreatorEvents);
-      } else {
-        events = this.eventCreatorEvents;
-      }
-      return events;
+      this.events = events;
     }
   },
   mounted() {
     console.log(this.data);
+    this.events = this.EventCreatorData.events;
   }
 };
 </script>
