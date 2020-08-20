@@ -3,7 +3,7 @@
     <div class="dates-container" :style="colorBorderStyleString">
       <div :style="'width:' + getNameWidth.toString()  + 'rem;'"></div>
       <div
-        class="input-container"
+        class="date-container"
         v-for="n in parseInt(daysOfWeek)"
         :key="n"
         :style="'width:'+ 100/daysOfWeek + '%;'"
@@ -16,6 +16,7 @@
       :resourceInfo="ri"
       :daysOfWeek="daysOfWeek"
       :weekDateStart="startDate"
+      :possisions="possisions"
       :NameSize="getNameWidth"
       v-on:input="onInput"
     ></EventCreatorLine>
@@ -42,7 +43,8 @@ export default {
     daysOfWeek: String,
     startDate: String,
     events: Array,
-    resourceInfos: Array
+    resourceInfos: Array,
+    possisions: Array
   },
   watch: {
     events() {
@@ -50,13 +52,15 @@ export default {
     }
   },
   mounted() {
-    console.log(this.resourceInfo);
+    console.log("possisions:");
+    console.log(this.possisions);
   },
   methods: {
     onInput(e) {
       //need to fix emit so it will join with other resources
       this.$emit("input", this.eventsForEmit(e));
     },
+
     getResourceInfo(resource) {
       var res = null;
       this.resourceInfos.forEach(rs => {
@@ -116,21 +120,15 @@ export default {
   width: 100%;
 }
 .dates-container {
-  display: flex; /* or inline-flex */
+  display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   margin: 10px;
   width: auto;
   border-bottom: 2px solid black;
 }
-.dates-foreach {
-  display: flex;
-  /* or inline-flex */
-  flex-direction: row;
-  flex-wrap: nowrap;
-  width: auto;
-}
-.input-container {
+
+.date-container {
   margin: 5px;
   font-size: 16px;
 }

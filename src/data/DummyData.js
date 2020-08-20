@@ -429,7 +429,8 @@ export const dummyResourceInfoForEventCreator = [{
     possision: "Uklid"
   }
 ]
-
+// TODO add resource dictionary
+export const possisionList = ["KP", "Uklid", "Bar", "Servis", "Kuchar"]
 
 export const dummyEventsForEventCreator = [
   //A  

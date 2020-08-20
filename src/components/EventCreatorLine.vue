@@ -1,5 +1,5 @@
 <template>
-  <div class="event-creator-line-container" :style="colorBorderStyleString">
+  <div class="event-creator-line-container" :style="this.colorBorderStyleString">
     <div :style="colorStyleString" class="name-container">
       {{resourceInfo.name}}
       <div style="font-size: 0.6rem">({{resourceInfo.possision}})</div>
@@ -34,12 +34,13 @@ export default {
     };
   },
   props: {
-    //  must contain name color id and default possision
+    // !  must contain name color id and default possision
     resourceInfo: Object,
     events: Array,
     daysOfWeek: String,
     weekDateStart: String,
-    NameSize: Number
+    NameSize: Number,
+    possisions: Array
   },
   watch: {
     events() {
@@ -70,7 +71,12 @@ export default {
     createEventString(event) {
       var start = moment(event.start, "YYYY-MM-DD HH:mm").format("HH:mm");
       var end = moment(event.end, "HH:mm").format("HH:mm");
-      var str = start + "-" + end;
+      var possision = "";
+      if (event.possision != this.resourceInfo.possision) {
+        possision = event.possision.charAt(0);
+      }
+
+      var str = possision + start + "-" + end;
       return str;
     },
     onChange(event) {
@@ -113,6 +119,14 @@ export default {
 
     createEvent(string, id) {
       var date = moment(this.weekDateStart, "YYYY-MM-DD").add(id - 1, "d");
+      var c = string.charAt(0);
+      var possision = this.resourceInfo.possision;
+      if (!(c >= "0" && c <= "9")) {
+        //* if first character isnt number
+        possision = this.getPossision(c);
+        //delete first car
+        string = string.substring(1);
+      }
       var times = this.parseTimes(string);
       var result = null;
       if (!(times.start > times.end)) {
@@ -121,7 +135,7 @@ export default {
           end: times.end,
           color: this.resourceInfo.color,
           resource: this.resourceInfo.id,
-          possision: this.resourceInfo.possision
+          possision: possision
         };
         result = eventObject;
       } else {
@@ -190,6 +204,21 @@ export default {
         res[i] = d;
       });
       return res;
+    },
+    getPossision(char) {
+      // TODO GET POSSISIONS TO COMPONENT
+      // var res = "";
+
+      // this.possisions.forEach(r => {
+      //   if (char == r.atChar(0)) res = r;
+      // });
+      // return res;
+      char = char.toLowerCase();
+      if (char == "p") return "KP";
+      if (char == "u") return "Uklid";
+      if (char == "b") return "Bar";
+      if (char == "s") return "Servis";
+      if (char == "k") return "kKuchar";
     }
   },
   computed: {

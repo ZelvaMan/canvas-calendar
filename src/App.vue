@@ -10,7 +10,7 @@
         :endTime="endTime"
         :events="events"
         StartDate="2020-08-10"
-        
+        :possisions="getPossisions"
         daysOfWeek="5"
       />
       <EventCreator
@@ -30,7 +30,8 @@ import EventCreator from "./components/EventCreator";
 import {
   dummyEventsForRenderTest,
   dummyEventsForEventCreator,
-  dummyResourceInfoForEventCreator
+  dummyResourceInfoForEventCreator,
+  possisionList
 } from "./data/DummyData.js";
 export default {
   name: "App",
@@ -47,6 +48,7 @@ export default {
       },
       eventCreatorEvents: [],
       dummyEventsBool: true,
+      possisions: possisionList,
       events: [],
       startTime: "8:00",
       endTime: "22:00"
@@ -56,6 +58,15 @@ export default {
     addEvent(events) {
       console.log(events);
       this.events = events;
+    }
+  },
+  computed: {
+    getPossisions() {
+      var p = this.possisions;
+
+      console.log(" get possisions:");
+      console.log(p);
+      return p;
     }
   },
   mounted() {
