@@ -5,7 +5,7 @@
       :startTime="startTime"
       :endTime="endTime"
       v-for="date in eventsGroupedByDay"
-      v-bind:key="date.date"
+     :key="date.date"
       :events="date.events"
     ></LineContainer>
   </div>
@@ -25,11 +25,12 @@ export default {
     startTime: String,
     endTime: String,
     possision: String,
-    //!!!!!!!!!only for that specific week
     events: Array,
-    beginningDate: String
+    StartDate: String,
+    daysOfWeek: String
   },
   computed: {
+    //add date property based on start to every event 
     eventsWDate() {
       var events = this.events;
       events.forEach(e => {
@@ -37,24 +38,36 @@ export default {
       });
       return events;
     },
+
+    //group event by day while fill empty days in week with 
     eventsGroupedByDay() {
       var result = [];
       var events = this.eventsWDate;
-      var byDate = this.$_.chain(events)
-        // Group the elements of Array based on `color` property
+      
+      //group events by date 
+      var byDate = this.$_.chain(events)   
         .groupBy("date")
-        // `key` is group's name (color), `value` is the array of objects
         .map((value, key) => ({ date: key, events: value }))
         .value();
-      var cdate = moment(this.beginningDate).format("MM.DD.");
-      for (let i = 0; i < 5; i++) {
-        var d = this.haveDate(byDate, cdate);
+
+      //curent date for foreach 
+      var curDate = moment(this.StartDate).format("MM.DD.");
+
+      //foeach
+      for (let i = 0; i < this.daysOfWeek, i++) {
+        //chekc for event with this date
+        var d = this.haveDate(byDate, curDate);
+        //if there are events add to resul
         if (d != undefined) {
           result.push(d);
-        } else {
-          result.push({ date: cdate, events: [] });
         }
-        cdate = moment(cdate)
+        //else push object with date and empty events for render
+         else {
+          
+          result.push({ date: curDate, events: [] });
+        }
+        //add one day ti curdate
+        curDate = moment(curDate)
           .add(1, "d")
           .format("MM.DD.");
       }
@@ -62,8 +75,11 @@ export default {
     }
   },
   methods: {
+    //return all events from array with matching date
     haveDate(array, date) {
+      //format date 
       var tdate = moment(date).format("MM.DD.");
+
       var r = undefined;
       array.forEach(d => {
         if (d.date == tdate) {
@@ -73,8 +89,7 @@ export default {
       });
       return r;
     }
-  },
-  mounted() {}
+  }
 };
 </script>
 <style scoped>

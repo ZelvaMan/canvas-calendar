@@ -9,7 +9,9 @@
         :startTime="startTime"
         :endTime="endTime"
         :events="events"
-        weekDateStart="2020-08-10"
+        StartDate="2020-08-10"
+        
+        daysOfWeek="5"
       />
       <EventCreator
         daysOfWeek="5"
