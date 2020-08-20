@@ -1,5 +1,14 @@
 <template>
   <div class="container">
+    <div class="dates-container" :style="colorBorderStyleString">
+      <div :style="'width:' + getNameWidth.toString()  + 'rem;'"></div>
+      <div
+        class="input-container"
+        v-for="n in parseInt(daysOfWeek)"
+        :key="n"
+        :style="'width:'+ 100/daysOfWeek + '%;'"
+      >{{moment(startDate).add(n,"d").format("MM.DD.")}}</div>
+    </div>
     <EventCreatorLine
       v-for="ri in resourceInfos"
       :key="ri.id"
@@ -90,11 +99,13 @@ export default {
       return events;
     }
   },
-  computed:{
-    getNameWidth(){
-      var longest = this.resourceInfos.reduce(function (a, b) { return a.name.length > b.name.length ? a : b; });
-      console.log("longest:")
-      console.log(longest)
+  computed: {
+    getNameWidth() {
+      var longest = this.resourceInfos.reduce(function(a, b) {
+        return a.name.length > b.name.length ? a : b;
+      });
+      console.log("longest:");
+      console.log(longest);
       return longest.name.length;
     }
   }
@@ -103,6 +114,24 @@ export default {
 <style scoped>
 .container {
   width: 100%;
-  border: 2px black dotted;
+}
+.dates-container {
+  display: flex; /* or inline-flex */
+  flex-direction: row;
+  flex-wrap: nowrap;
+  margin: 10px;
+  width: auto;
+  border-bottom: 2px solid black;
+}
+.dates-foreach {
+  display: flex;
+  /* or inline-flex */
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: auto;
+}
+.input-container {
+  margin: 5px;
+  font-size: 16px;
 }
 </style>

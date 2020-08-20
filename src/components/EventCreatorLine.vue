@@ -39,8 +39,7 @@ export default {
     events: Array,
     daysOfWeek: String,
     weekDateStart: String,
-    NameSize: Number,
-
+    NameSize: Number
   },
   watch: {
     events() {
@@ -195,7 +194,13 @@ export default {
   },
   computed: {
     colorStyleString() {
-      return "color:" + this.resourceInfo.color + ";width:" + this.NameSize.toString()+"rem;" ;
+      return (
+        "color:" +
+        this.resourceInfo.color +
+        ";width:" +
+        this.NameSize.toString() +
+        "rem;"
+      );
     },
     colorBorderStyleString() {
       return " border-bottom: 2px solid " + this.resourceInfo.color + ";";
