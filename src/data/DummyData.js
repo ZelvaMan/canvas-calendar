@@ -410,21 +410,21 @@ export const dummyEventsForRenderTest = [{
 export const dummyResourceInfoForEventCreator = [{
 
     color: "red",
-    name: "A",
+    name: "Adam",
     id: "A",
     possision: "Pizza"
   },
   {
 
     color: "blue",
-    name: "B",
+    name: "Bartoloměj",
     id: "B",
     possision: "KP"
   },
   {
 
     color: "green",
-    name: "C",
+    name: "Cecil",
     id: "C",
     possision: "Uklid"
   }

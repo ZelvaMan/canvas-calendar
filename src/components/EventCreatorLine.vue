@@ -1,6 +1,6 @@
 <template>
   <div class="event-creator-line-container" :style="colorBorderStyleString">
-    <div :style="colorStyleString">
+    <div :style="colorStyleString" class="name-container">
       {{resourceInfo.name}}
       <div style="font-size: 0.6rem">({{resourceInfo.possision}})</div>
     </div>
@@ -38,7 +38,9 @@ export default {
     resourceInfo: Object,
     events: Array,
     daysOfWeek: String,
-    weekDateStart: String
+    weekDateStart: String,
+    NameSize: Number,
+
   },
   watch: {
     events() {
@@ -193,7 +195,7 @@ export default {
   },
   computed: {
     colorStyleString() {
-      return "color:" + this.resourceInfo.color + ";";
+      return "color:" + this.resourceInfo.color + ";width:" + this.NameSize.toString()+"rem;" ;
     },
     colorBorderStyleString() {
       return " border-bottom: 2px solid " + this.resourceInfo.color + ";";

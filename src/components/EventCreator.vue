@@ -7,6 +7,7 @@
       :resourceInfo="ri"
       :daysOfWeek="daysOfWeek"
       :weekDateStart="startDate"
+      :NameSize="getNameWidth"
       v-on:input="onInput"
     ></EventCreatorLine>
   </div>
@@ -87,6 +88,14 @@ export default {
         events = events.concat(groupedResource.events);
       }
       return events;
+    }
+  },
+  computed:{
+    getNameWidth(){
+      var longest = this.resourceInfos.reduce(function (a, b) { return a.name.length > b.name.length ? a : b; });
+      console.log("longest:")
+      console.log(longest)
+      return longest.name.length;
     }
   }
 };
