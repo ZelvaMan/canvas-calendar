@@ -54,7 +54,7 @@ export default {
       var curDate = moment(this.StartDate).format("MM.DD.");
 
       //foeach
-      for (let i = 0; i < this.daysOfWeek, i++) {
+      for (let i = 0; i < this.daysOfWeek; i++) {
         //chekc for event with this date
         var d = this.haveDate(byDate, curDate);
         //if there are events add to resul
