@@ -51,8 +51,8 @@ export default {
         .value();
 
       //curent date for foreach 
-      var curDate = moment(this.StartDate).format("MM.DD.");
-
+      var curDate = moment( "2020-8-10").format("MM.DD.");
+      
       //foeach
       for (let i = 0; i < this.daysOfWeek; i++) {
         //chekc for event with this date
@@ -71,6 +71,9 @@ export default {
           .add(1, "d")
           .format("MM.DD.");
       }
+      
+      console.log("grouped by day ")
+      console.log(result)
       return result;
     }
   },
@@ -78,6 +81,7 @@ export default {
     //return all events from array with matching date
     haveDate(array, date) {
       //format date 
+      console.log(array)
       var tdate = moment(date).format("MM.DD.");
 
       var r = undefined;
