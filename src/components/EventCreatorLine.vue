@@ -53,7 +53,13 @@ export default {
     setTextAreasByEvents() {
       console.log("setting text arreas");
       this.eventsGroupedByDay.forEach(d => {
+        console.log(d.date);
         var diff = this.daysDiff(this.weekDateStart, d.date);
+        //TODO throw error in Firefox
+        //! doesnt work in firefox?????
+        console.log("diff");
+        console.log(diff + 1);
+        console.log(d);
         var textarea = this.$refs[diff + 1][0];
         var str = this.createDayString(d.events);
         textarea.value = str;
@@ -69,7 +75,7 @@ export default {
       return str;
     },
     createEventString(event) {
-      var start = moment(event.start, "YYYY-MM-DD HH:mm").format("HH:mm");
+      var start = moment(event.start, "YYYY/MM/DD HH:mm").format("HH:mm");
       var end = moment(event.end, "HH:mm").format("HH:mm");
       var possision = "";
       if (event.possision != this.resourceInfo.possision) {
@@ -118,7 +124,7 @@ export default {
     },
 
     createEvent(string, id) {
-      var date = moment(this.weekDateStart, "YYYY-MM-DD").add(id - 1, "d");
+      var date = moment(this.weekDateStart, "YYYY/MM/DD").add(id - 1, "d");
       var c = string.charAt(0);
       var possision = this.resourceInfo.possision;
       if (!(c >= "0" && c <= "9")) {
@@ -131,7 +137,7 @@ export default {
       var result = null;
       if (!(times.start > times.end)) {
         var eventObject = {
-          start: date.format("YYYY-MM-DD") + " " + times.start,
+          start: date.format("YYYY/MM/DD") + " " + times.start,
           end: times.end,
           color: this.resourceInfo.color,
           resource: this.resourceInfo.id,
@@ -183,12 +189,19 @@ export default {
       return result;
     },
     daysDiff(date1, date2) {
-      var start = moment(date1, "YYYY-MM-DD");
-      var end = moment(date2, "MM-DD");
+      console.log("date2 string");
+      console.log(date2);
+      var start = moment(date1, "YYYY/MM/DD");
+      var end = moment(date2, "MM/DD");
+      console.log("start");
+      console.log(start);
+      console.log("end");
+      console.log(end);
+      console.log(date2);
       return Math.abs(moment.duration(start.diff(end)).asDays());
     },
     haveDate(array, date) {
-      var tdate = moment(date).format("MM.DD.");
+      var tdate = moment(date, "MM/DD").format("MM/DD");
       var r = undefined;
       array.forEach(d => {
         if (d.date == tdate) {
@@ -214,11 +227,11 @@ export default {
       // });
       // return res;
       char = char.toLowerCase();
-      if (char == "p") return "KP";
+      if (char == "p") return "Pizza";
       if (char == "u") return "Uklid";
       if (char == "b") return "Bar";
       if (char == "s") return "Servis";
-      if (char == "k") return "kKuchar";
+      if (char == "k") return "Kuchar";
     }
   },
   computed: {
@@ -241,8 +254,12 @@ export default {
     eventsWDate() {
       var events = this.events;
       events.forEach(e => {
-        e.date = moment(e.start).format("MM.DD.");
+        console.log("date form eventsWDate");
+        console.log(moment(e.start, "YYYY/MM/DD HH:mm").format("MM/DD"));
+        e.date = moment(e.start, "YYYY/MM/DD HH:mm").format("MM/DD");
+        console.log(e.date);
       });
+      console.log(events);
       return events;
     },
     eventsGroupedByDay() {
@@ -258,7 +275,7 @@ export default {
         }))
         .value();
 
-      var cdate = moment(this.weekDateStart).format("MM.DD.");
+      var cdate = moment(this.weekDateStart, "YYYY/MM/DD").format("MM/DD");
       for (let i = 0; i < 5; i++) {
         var d = this.haveDate(byDate, cdate);
         if (d != undefined) {
@@ -266,9 +283,9 @@ export default {
         } else {
           result.push({ date: cdate, events: [] });
         }
-        cdate = moment(cdate)
+        cdate = moment(cdate, "MM/DD")
           .add(1, "d")
-          .format("MM.DD.");
+          .format("MM/DD");
       }
       return result;
     }

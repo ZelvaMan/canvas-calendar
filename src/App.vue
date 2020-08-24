@@ -1,15 +1,30 @@
 <template>
   <div id="app">
-    <h1>WeekOverview</h1>
-    <h3>
-      <a href="https://github.com/ZelvaMan/canvas-calendar">Git hub</a>
-    </h3>
+    <div class="info">
+      <div style="width:60%;">
+        <h1>WeekOverview</h1>
+        <h3>
+          <a href="https://github.com/ZelvaMan/canvas-calendar">Git hub</a>
+        </h3>
+      </div>
+      <div class="card">
+        <h3>zkratky</h3>
+        <p>
+          p == Pizza
+          <br />u == Uklid
+          <br />b == Bar
+          <br />s == Servis
+          <br />k == Kuchar
+          <br />
+        </p>
+      </div>
+    </div>
     <div class="flex-container">
       <WeekOverview
         :startTime="startTime"
         :endTime="endTime"
         :events="events"
-        StartDate="2020-08-10"
+        StartDate="2020/08/10"
         :possisions="getPossisions"
         daysOfWeek="5"
       />
@@ -18,7 +33,7 @@
         v-on:input="addEvent"
         :events="events"
         :resourceInfos="EventCreatorData.resourceInfo"
-        startDate="2020-08-10"
+        startDate="2020/08/10"
       ></EventCreator>
     </div>
   </div>
@@ -91,5 +106,20 @@ export default {
 
   height: 100%;
   display: flex;
+}
+.info {
+  flex-direction: collumn;
+  display: flex;
+}
+.card {
+  /* Add shadows to create the "card" effect */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  width: 20%;
+}
+
+/* On mouse-over, add a deeper shadow */
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 </style>

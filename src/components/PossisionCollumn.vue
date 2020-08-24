@@ -5,7 +5,7 @@
       :startTime="startTime"
       :endTime="endTime"
       v-for="date in eventsGroupedByDay"
-     :key="date.date"
+      :key="date.date"
       :events="date.events"
     ></LineContainer>
   </div>
@@ -30,29 +30,29 @@ export default {
     daysOfWeek: String
   },
   computed: {
-    //add date property based on start to every event 
+    //add date property based on start to every event
     eventsWDate() {
       var events = this.events;
       events.forEach(e => {
-        e.date = moment(e.start).format("MM.DD.");
+        e.date = moment(e.start, "YYYY/MM/DD").format("MM/DD");
       });
       return events;
     },
 
-    //group event by day while fill empty days in week with 
+    //group event by day while fill empty days in week with
     eventsGroupedByDay() {
       var result = [];
       var events = this.eventsWDate;
-      
-      //group events by date 
-      var byDate = this.$_.chain(events)   
+
+      //group events by date
+      var byDate = this.$_.chain(events)
         .groupBy("date")
         .map((value, key) => ({ date: key, events: value }))
         .value();
 
-      //curent date for foreach 
-      var curDate = moment( "2020-8-10").format("MM.DD.");
-      
+      //curent date for foreach
+      var curDate = moment("2020/8/10", "YYYY/MM/DD").format("MM/DD");
+
       //foeach
       for (let i = 0; i < this.daysOfWeek; i++) {
         //chekc for event with this date
@@ -62,27 +62,26 @@ export default {
           result.push(d);
         }
         //else push object with date and empty events for render
-         else {
-          
+        else {
           result.push({ date: curDate, events: [] });
         }
         //add one day ti curdate
-        curDate = moment(curDate)
+        curDate = moment(curDate, "MM/DD")
           .add(1, "d")
-          .format("MM.DD.");
+          .format("MM/DD");
       }
-      
-      console.log("grouped by day ")
-      console.log(result)
+
+      console.log("grouped by day ");
+      console.log(result);
       return result;
     }
   },
   methods: {
     //return all events from array with matching date
     haveDate(array, date) {
-      //format date 
-      console.log(array)
-      var tdate = moment(date).format("MM.DD.");
+      //format date
+      console.log(array);
+      var tdate = moment(date, "MM/DD").format("MM/DD");
 
       var r = undefined;
       array.forEach(d => {

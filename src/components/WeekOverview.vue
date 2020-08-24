@@ -15,7 +15,7 @@
         <p class="starttime-text">{{startTime}}</p>
         <br />
 
-        <b class="date">{{moment(StartDate).add(i -1, 'd').format("DD.MM.")}}</b>
+        <b class="date">{{moment(StartDate,"YYYY/MM/DD").add(i -1, 'd').format("DD.MM.")}}</b>
         <br />
         <p class="endtime-text">{{endTime}}</p>
       </div>
@@ -27,7 +27,7 @@
       :startTime="startTime"
       :endTime="endTime"
       :events="e.events"
-      beginningDate="	2020-08-10"
+      beginningDate="	2020/08/10"
       :daysOfWeek="daysOfWeek"
     ></PossisionCollumn>
   </div>
@@ -48,7 +48,7 @@ export default {
     startTime: String,
     endTime: String,
     events: Array,
-    //date on which you want to start render week 
+    //date on which you want to start render week
     StartDate: String,
     daysOfWeek: String
   },
@@ -125,5 +125,4 @@ export default {
   flex-wrap: nowrap;
   height: 30px;
 }
-
 </style>

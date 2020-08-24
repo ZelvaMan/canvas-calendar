@@ -7,7 +7,7 @@
         v-for="n in parseInt(daysOfWeek)"
         :key="n"
         :style="'width:'+ 100/daysOfWeek + '%;'"
-      >{{moment(startDate).add(n,"d").format("MM.DD.")}}</div>
+      >{{moment(startDate).add(n,"d").format("MM/DD")}}</div>
     </div>
     <EventCreatorLine
       v-for="ri in resourceInfos"

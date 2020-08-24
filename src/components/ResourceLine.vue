@@ -41,53 +41,49 @@ export default {
       var pPQuarter = pPHour / 4;
       var id = 0;
 
-      //if there aren't any events, fill 
+      //if there aren't any events, fill
       var divs = [{ color: this.tcolor, height: "100", id: ++id }];
 
-
       var lastEventEnd = startHour;
-      var lastEventMinute = '0'
+      var lastEventMinute = "0";
       //check if there are any events
       if (this.events != undefined) {
         divs = [];
 
         this.events.forEach(e => {
-
-          //parese start and end objects from 
-          var eStartMoment = moment(e.start, "YYYY-MM-DD hh:mm")
+          //parese start and end objects from
+          var eStartMoment = moment(e.start, "YYYY/MM/DD hh:mm");
           var eStart = {
             hour: eStartMoment.format("HH"),
             minute: eStartMoment.format("mm")
           };
-          var eEndMoment = moment(e.end, "hh:mm")
+          var eEndMoment = moment(e.end, "hh:mm");
           var eEnd = {
             hour: eEndMoment.format("HH"),
             minute: eEndMoment.format("mm")
           };
-
 
           //if is event bigger then range, set ti to full height
           if (eStart.hour < startHour) eStart.hour = startHour;
           if (eEnd.hour > endHour) eEnd.hour = endHour;
 
           // calculate div height
-          var bDivHeigh = (eStart.hour - lastEventEnd) * pPHour
-          bDivHeigh -= this.minToQuarter(lastEventMinute) * pPQuarter 
+          var bDivHeigh = (eStart.hour - lastEventEnd) * pPHour;
+          bDivHeigh -= this.minToQuarter(lastEventMinute) * pPQuarter;
           bDivHeigh += this.minToQuarter(eStart.minute) * pPQuarter;
-          //fill blank space between last event end and this 
+          //fill blank space between last event end and this
           var blankDiv = {
             color: this.tcolor,
             height: bDivHeigh,
             id: ++id
           };
-          if(blankDiv.height != 0){
+          if (blankDiv.height != 0) {
             divs.push(blankDiv);
           }
 
-
           // calculate div height based on event lenght
-          var divHeigh = (eEnd.hour - eStart.hour) * pPHour;          
-          divHeigh -= this.minToQuarter(eStart.minute) * pPQuarter 
+          var divHeigh = (eEnd.hour - eStart.hour) * pPHour;
+          divHeigh -= this.minToQuarter(eStart.minute) * pPQuarter;
           divHeigh += this.minToQuarter(eEnd.minute) * pPQuarter;
 
           //create div and add it to divs
@@ -106,7 +102,6 @@ export default {
   methods: {
     //conmvert minutes to quarters  30= 2 ...
     minToQuarter(minute) {
-      
       return Math.round(minute / 15);
     },
     //creatr dynamic style string
