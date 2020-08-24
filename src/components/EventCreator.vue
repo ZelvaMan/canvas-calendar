@@ -118,6 +118,7 @@ export default {
 <style scoped>
 .container {
   width: 100%;
+  margin-top: 25px;
 }
 .dates-container {
   display: flex;
@@ -132,4 +133,4 @@ export default {
   margin: 5px;
   font-size: 16px;
 }
-</style>
+</style>  

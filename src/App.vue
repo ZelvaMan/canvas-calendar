@@ -108,6 +108,7 @@ export default {
 
   height: 100%;
   display: flex;
+  margin-top: 25px;
 }
 .info {
   flex-direction: collumn;

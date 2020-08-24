@@ -104,14 +104,15 @@ export default {
 }
 .date {
   grid-row: 2;
+  margin-top: 4px;
 }
 .starttime-text {
-  font-size: 0.5rem;
+  font-size: 0.75rem;
   margin-block-start: 0rem;
   grid-row: 1;
 }
 .endtime-text {
-  font-size: 0.5rem;
+  font-size: 0.75rem;
   align-items: end;
   vertical-align: bottom;
   margin-block-end: 0rem;
@@ -123,6 +124,7 @@ export default {
   color: black;
   text-decoration: none;
   flex-wrap: nowrap;
-  height: 30px;
+  height: 29.38px;
+  padding: 5px;
 }
 </style>

@@ -108,8 +108,8 @@ export default {
   min-width: 40px;
 }
 .resource-name {
-  height: 25px;
-  margin: 5px;
+  height: 35px;
+  padding: 5px;
   min-width: 40px;
 }
 </style>

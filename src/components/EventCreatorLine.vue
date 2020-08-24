@@ -47,29 +47,31 @@ export default {
   },
   watch: {
     events() {
-      //rerender all
+      //* render events from this.events
       this.eventsByDay = this.eventsData(this.events);
       this.setTextAreasByEvents();
     }
   },
   methods: {
+    // sets default texts for textaras
     setTextAreasByEvents() {
-      console.log("setting text arreas");
       this.eventsGroupedByDay.forEach(d => {
-        console.log(d.date);
+        //difference between start date an date, used to calculate textare ID
         var diff = this.daysDiff(this.weekDateStart, d.date);
-        //TODO throw error in Firefox
-        //! doesnt work in firefox?????
-        console.log("diff");
-        console.log(diff + 1);
-        console.log(d);
+        //get textarea ref based on days between date and weekDateStart
         var textarea = this.$refs[diff + 1][0];
+        //get event string
         var str = this.createDayString(d.events);
+        //set textare to that string
         textarea.value = str;
       });
     },
+    //create day string for events to be render in textareas
     createDayString(events) {
+      //create variables
       var str = "";
+
+      //foreach events and create string for each one and joint them together
       events.forEach(e => {
         var s = this.createEventString(e);
         str += s;
@@ -77,55 +79,71 @@ export default {
       });
       return str;
     },
+    //create string for  event
     createEventString(event) {
+      //get start and end in right formats
       var start = moment(event.start, "YYYY/MM/DD HH:mm").format("HH:mm");
       var end = moment(event.end, "HH:mm").format("HH:mm");
       var possision = "";
+
+      //check if event have set different possision
       if (event.possision != this.resourceInfo.possision) {
+        //in that case set first char of string to first char of possision
         possision = event.possision.charAt(0);
       }
-
+      //joint string together
       var str = possision + start + "-" + end;
       return str;
     },
+
+    //event handlerer for text areasa
     onChange(event) {
       this.onChangeHandler(event.target);
     },
+    //methof fot hangeling onchange events
     onChangeHandler(target) {
       console.log("Change trigered s:" + target.value);
+
+      //if value is too small to be valid return
       if (target.value.replace(/' '|\n/g, "").lenght < 3) {
         return;
       }
+      //split string by \n
       var spl = target.value.split("\n");
+      //*if there is only one event
       if (spl == undefined) spl = target.value;
+
+      //get target id
       var id = target.id[0];
+
+      //set default values
       var events = [];
+      //* valid strings
       var sIfError = "";
       var error = false;
+
+      //foreach strings and create events for every one of them
       spl.forEach((s, i) => {
         var e = this.createEvent(spl[i], id);
-        console.log(target.value);
-        console.log("e");
-        console.log(e);
         //if error in crearing event ( propablly parsing)
         if (e == null) {
           error = true;
         } else {
+          //add to events and to valid string
           events.push(e);
-
           sIfError += s + "\n";
         }
       });
-      console.log(events);
       if (error == true) {
-        console.log("error ");
+        //set value to have only valid events
         target.value = sIfError;
       }
-      //
+      //set events
       this.eventsByDay[id - 1].events = events;
+      //emit
       this.emit();
     },
-
+    //create event
     createEvent(string, id) {
       var date = moment(this.weekDateStart, "YYYY/MM/DD").add(id - 1, "d");
       var c = string.charAt(0);
@@ -314,6 +332,7 @@ export default {
 .input-container {
   display: flex;
   height: auto;
+  width: 100%;
 }
 textarea {
   margin: 5px;
