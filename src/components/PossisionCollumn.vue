@@ -71,8 +71,8 @@ export default {
           .format("MM/DD");
       }
 
-      console.log("grouped by day ");
-      console.log(result);
+      // console.log("grouped by day ");
+      // console.log(result);
       return result;
     }
   },
@@ -80,7 +80,6 @@ export default {
     //return all events from array with matching date
     haveDate(array, date) {
       //format date
-      console.log(array);
       var tdate = moment(date, "MM/DD").format("MM/DD");
 
       var r = undefined;

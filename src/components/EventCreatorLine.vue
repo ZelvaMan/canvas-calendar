@@ -154,9 +154,12 @@ export default {
         //delete first car
         string = string.substring(1);
       }
+      //parse times from string
       var times = this.parseTimes(string);
       var result = null;
+      //if times are valid
       if (!(times.start > times.end)) {
+        //create event object
         var eventObject = {
           start: date.format("YYYY/MM/DD") + " " + times.start,
           end: times.end,
@@ -169,21 +172,23 @@ export default {
         result = null;
       }
       if (string == " " || string == "") {
+        //if string is empty
         result = null;
-        ("ERROR");
       }
-      console.log("result");
-      console.log(result);
       return result;
     },
+    //return object wih two moment time start and end
     parseTimes(string) {
-      console.log(string);
+      //create result object
+
       var result = { start: "", end: "" };
+      //split string to 2 datetimes
       var splitted = string.split("-");
       //start
       result.start = moment(splitted[0], "HH:mm").format("HH:mm");
 
       //end
+      //* if end is cl(close) set time to endTime
       if (splitted[1] == "cl") {
         result.end = this.endTime;
       } else {
@@ -191,11 +196,13 @@ export default {
       }
       return result;
     },
+    //* space press handler will add new line to code
     onSpace(e) {
       e.preventDefault();
       e.target.value += "\n";
       this.onChangeHandler(e.target);
     },
+    //! emits events
     emit() {
       console.log("emitting ");
       console.log(this.eventsToEmit());
@@ -204,30 +211,28 @@ export default {
         events: this.eventsToEmit()
       });
     },
+    //* format events for emit => add all event to one array
     eventsToEmit() {
       var result = [];
-      console.log("eventsbyday");
-      console.log(this.eventsByDay);
       this.eventsByDay.forEach(events => {
         result = result.concat(events.events);
       });
       return result;
     },
+    //! retun diferent (in days ) between 2 dates
     daysDiff(date1, date2) {
-      console.log("date2 string");
-      console.log(date2);
+      //parse dates to moment objects
       var start = moment(date1, "YYYY/MM/DD");
       var end = moment(date2, "MM/DD");
-      console.log("start");
-      console.log(start);
-      console.log("end");
-      console.log(end);
-      console.log(date2);
+      //! get diif using math abs and moment duration
       return Math.abs(moment.duration(start.diff(end)).asDays());
     },
+    //*check if array have events with that datre
     haveDate(array, date) {
+      //get moment datr
       var tdate = moment(date, "MM/DD").format("MM/DD");
       var r = undefined;
+      //foreach all event, return that datatr
       array.forEach(d => {
         if (d.date == tdate) {
           r = d;
@@ -236,6 +241,8 @@ export default {
       });
       return r;
     },
+    //? does it do something?
+    //TODO find if is it usefull
     eventsData(events) {
       var res = [];
       this.eventsGroupedByDay.forEach((d, i) => {
@@ -243,6 +250,8 @@ export default {
       });
       return res;
     },
+
+    //get possision starting with that char
     getPossision(char) {
       // TODO GET POSSISIONS TO COMPONENT
       // var res = "";
@@ -260,6 +269,7 @@ export default {
     }
   },
   computed: {
+    //create style for resourcename
     colorStyleString() {
       return (
         "color:" +
@@ -269,31 +279,29 @@ export default {
         "rem;"
       );
     },
+    //create style for border
     colorBorderStyleString() {
       return " border-bottom: 2px solid " + this.resourceInfo.color + ";";
     },
+    //create style for input
     inputDynamicStyle() {
       var width = 100 / this.daysOfWeek;
       return " width:" + width + "%;";
     },
+    //return events but add date prop
     eventsWDate() {
       var events = this.events;
       events.forEach(e => {
-        console.log("date form eventsWDate");
-        console.log(moment(e.start, "YYYY/MM/DD HH:mm").format("MM/DD"));
         e.date = moment(e.start, "YYYY/MM/DD HH:mm").format("MM/DD");
-        console.log(e.date);
       });
-      console.log(events);
       return events;
     },
+    //! group event by date
     eventsGroupedByDay() {
       var result = [];
       var events = this.eventsWDate;
       var byDate = this.$_.chain(events)
-        // Group the elements of Array based on `color` property
         .groupBy("date")
-        // `key` is group's name (color), `value` is the array of objects
         .map((value, key) => ({
           date: key,
           events: value
@@ -301,11 +309,15 @@ export default {
         .value();
 
       var cdate = moment(this.weekDateStart, "YYYY/MM/DD").format("MM/DD");
+      //! fills dates without events with empty object
+      //! IMPORTANT for rendering
       for (let i = 0; i < 5; i++) {
+        //check if there are events with this date
         var d = this.haveDate(byDate, cdate);
         if (d != undefined) {
           result.push(d);
         } else {
+          //if there arent push object ith empty dates
           result.push({ date: cdate, events: [] });
         }
         cdate = moment(cdate, "MM/DD")
