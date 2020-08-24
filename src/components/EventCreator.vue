@@ -7,7 +7,7 @@
         v-for="n in parseInt(daysOfWeek)"
         :key="n"
         :style="'width:'+ 100/daysOfWeek + '%;'"
-      >{{moment(startDate).add(n,"d").format("MM/DD")}}</div>
+      >{{moment(startDate).add(n,"d").format("MM.DD.")}}</div>
     </div>
     <EventCreatorLine
       v-for="ri in resourceInfos"
@@ -19,6 +19,8 @@
       :possisions="possisions"
       :NameSize="getNameWidth"
       v-on:input="onInput"
+      :startTime="startTime"
+      :endTime="endTime"
     ></EventCreatorLine>
   </div>
 </template>
@@ -44,17 +46,17 @@ export default {
     startDate: String,
     events: Array,
     resourceInfos: Array,
-    possisions: Array
+    possisions: Array,
+
+    startTime: String,
+    endTime: String
   },
   watch: {
     events() {
       this.eventsByResource = this.groupByResource();
     }
   },
-  mounted() {
-    console.log("possisions:");
-    console.log(this.possisions);
-  },
+  mounted() {},
   methods: {
     onInput(e) {
       //need to fix emit so it will join with other resources
@@ -108,8 +110,6 @@ export default {
       var longest = this.resourceInfos.reduce(function(a, b) {
         return a.name.length > b.name.length ? a : b;
       });
-      console.log("longest:");
-      console.log(longest);
       return longest.name.length;
     }
   }

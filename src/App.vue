@@ -31,6 +31,8 @@
       <EventCreator
         daysOfWeek="5"
         v-on:input="addEvent"
+        :startTime="startTime"
+        :endTime="endTime"
         :events="events"
         :resourceInfos="EventCreatorData.resourceInfo"
         startDate="2020/08/10"

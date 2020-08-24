@@ -36,6 +36,9 @@ export default {
   props: {
     // !  must contain name color id and default possision
     resourceInfo: Object,
+
+    startTime: String,
+    endTime: String,
     events: Array,
     daysOfWeek: String,
     weekDateStart: String,
@@ -163,7 +166,11 @@ export default {
       result.start = moment(splitted[0], "HH:mm").format("HH:mm");
 
       //end
-      result.end = moment(splitted[1], "HH:mm").format("HH:mm");
+      if (splitted[1] == "cl") {
+        result.end = this.endTime;
+      } else {
+        result.end = moment(splitted[1], "HH:mm").format("HH:mm");
+      }
       return result;
     },
     onSpace(e) {
