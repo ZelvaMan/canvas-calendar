@@ -46,7 +46,7 @@ export default {
 
 
       var lastEventEnd = startHour;
-
+      var lastEventMinute = '0'
       //check if there are any events
       if (this.events != undefined) {
         divs = [];
@@ -70,11 +70,14 @@ export default {
           if (eStart.hour < startHour) eStart.hour = startHour;
           if (eEnd.hour > endHour) eEnd.hour = endHour;
 
-
+          // calculate div height
+          var bDivHeigh = (eStart.hour - lastEventEnd) * pPHour
+          bDivHeigh -= this.minToQuarter(lastEventMinute) * pPQuarter 
+          bDivHeigh += this.minToQuarter(eStart.minute) * pPQuarter;
           //fill blank space between last event end and this 
           var blankDiv = {
             color: this.tcolor,
-            height: (eStart.hour - lastEventEnd) * pPHour,
+            height: bDivHeigh,
             id: ++id
           };
           if(blankDiv.height != 0){
@@ -93,6 +96,7 @@ export default {
 
           //set event end to end of event
           lastEventEnd = eEnd.hour;
+          lastEventMinute = eEnd.minute;
         });
       }
 
