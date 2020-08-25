@@ -5,16 +5,18 @@
       <div style="font-size: 0.6rem">({{resourceInfo.possision}})</div>
     </div>
     <div class="input-container">
-      <textarea
+      <div
         v-for="n in parseInt(daysOfWeek, 10)"
         :key="n"
         :ref="n"
         :id="   n+ '-' +resourceInfo.id "
         type="text"
         :style="inputDynamicStyle"
-        v-on:change="onChange"
+        v-on:blur="onChange"
         v-on:keyup.space="onSpace"
         oninput="this.style.height = '';this.style.height = this.scrollHeight + 'px'"
+        contenteditable="true"
+        class="input"
       />
     </div>
   </div>
@@ -63,7 +65,7 @@ export default {
         //get event string
         var str = this.createDayString(d.events);
         //set textare to that string
-        textarea.value = str;
+        textarea.innerText = str;
       });
     },
     //create day string for events to be render in textareas
@@ -98,20 +100,21 @@ export default {
 
     //event handlerer for text areasa
     onChange(event) {
+      console.log("change vent fired")
       this.onChangeHandler(event.target);
     },
     //methof fot hangeling onchange events
     onChangeHandler(target) {
-      console.log("Change trigered s:" + target.value);
+      console.log("Change trigered s:" + target.innerText);
 
       //if value is too small to be valid return
-      if (target.value.replace(/' '|\n/g, "").lenght < 3) {
+      if (target.innerText.replace(/' '|\n/g, "").lenght < 3) {
         return;
       }
       //split string by \n
-      var spl = target.value.split("\n");
+      var spl = target.innerText.split("\n");
       //*if there is only one event
-      if (spl == undefined) spl = target.value;
+      if (spl == undefined) spl = target.innerText;
 
       //get target id
       var id = target.id[0];
@@ -136,7 +139,7 @@ export default {
       });
       if (error == true) {
         //set value to have only valid events
-        target.value = sIfError;
+        target.innerText = sIfError;
       }
       //set events
       this.eventsByDay[id - 1].events = events;
@@ -199,7 +202,7 @@ export default {
     //* space press handler will add new line to code
     onSpace(e) {
       e.preventDefault();
-      e.target.value += "\n";
+      e.target.innerText += "\n";
       this.onChangeHandler(e.target);
     },
     //! emits events
@@ -281,12 +284,12 @@ export default {
     },
     //create style for border
     colorBorderStyleString() {
-      return " border-bottom: 2px solid " + this.resourceInfo.color + ";";
+      return " border-left: 5px solid " + this.resourceInfo.color + ";";
     },
     //create style for input
     inputDynamicStyle() {
-      var width = 100 / this.daysOfWeek;
-      return " width:" + width + "%;";
+    
+      return " ";
     },
     //return events but add date prop
     eventsWDate() {
@@ -338,18 +341,21 @@ export default {
   display: flex; /* or inline-flex */
   flex-direction: row;
   flex-wrap: nowrap;
-  margin: 10px;
   width: auto;
 }
 .input-container {
   display: flex;
   height: auto;
-  width: 100%;
 }
-textarea {
-  margin: 5px;
-  width: auto;
+.input {
+  width: 7rem;
   resize: both;
   overflow: none;
+  border: solid 1px rgb(128,128,128,0.4);
+  text-align: center;
+  padding-right: 1px
+}
+.name-container{
+    border: solid 1px rgb(128,128,128,0.4);
 }
 </style>

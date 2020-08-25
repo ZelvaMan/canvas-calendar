@@ -1,12 +1,11 @@
 <template>
   <div class="container">
-    <div class="dates-container" :style="colorBorderStyleString">
-      <div :style="'width:' + getNameWidth.toString()  + 'rem;'"></div>
+    <div class="dates-container" >
+      <div :style="'width:' + getNameWidth.toString()  + 'rem;'" class="white-space"></div>
       <div
         class="date-container"
         v-for="n in parseInt(daysOfWeek)"
         :key="n"
-        :style="'width:'+ 100/daysOfWeek + '%;'"
       >{{moment(startDate).add(n,"d").format("MM.DD.")}}</div>
     </div>
     <EventCreatorLine
@@ -117,20 +116,22 @@ export default {
 </script>
 <style scoped>
 .container {
-  width: 100%;
   margin-top: 25px;
 }
 .dates-container {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  margin: 10px;
   width: auto;
   border-bottom: 2px solid black;
 }
 
 .date-container {
-  margin: 5px;
+  margin: 1px;
+  width: 7rem;
   font-size: 16px;
+}
+.white-space{
+  border-left:solid transparent 5px;
 }
 </style>  
