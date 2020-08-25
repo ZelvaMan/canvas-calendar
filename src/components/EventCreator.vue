@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="dates-container" >
-      <div :style="'width:' + getNameWidth.toString()  + 'rem;'" class="white-space"></div>
+      <div :style="'width:' + (getNameWidth/1.7).toString()  + 'rem;'" class="white-space"></div>
       <div
         class="date-container"
         v-for="n in parseInt(daysOfWeek)"
@@ -132,6 +132,7 @@ export default {
   font-size: 16px;
 }
 .white-space{
+  margin:1px;
   border-left:solid transparent 5px;
 }
 </style>  

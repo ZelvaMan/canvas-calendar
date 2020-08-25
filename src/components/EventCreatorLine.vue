@@ -11,7 +11,6 @@
         :ref="n"
         :id="   n+ '-' +resourceInfo.id "
         type="text"
-        :style="inputDynamicStyle"
         v-on:blur="onChange"
         v-on:keyup.space="onSpace"
         oninput="this.style.height = '';this.style.height = this.scrollHeight + 'px'"
@@ -203,6 +202,7 @@ export default {
     onSpace(e) {
       e.preventDefault();
       e.target.innerText += "\n";
+      e.target.innerText += "\n";
       this.onChangeHandler(e.target);
     },
     //! emits events
@@ -278,18 +278,13 @@ export default {
         "color:" +
         this.resourceInfo.color +
         ";width:" +
-        this.NameSize.toString() +
+        (this.NameSize.toString()/1.7) +
         "rem;"
       );
     },
     //create style for border
     colorBorderStyleString() {
       return " border-left: 5px solid " + this.resourceInfo.color + ";";
-    },
-    //create style for input
-    inputDynamicStyle() {
-    
-      return " ";
     },
     //return events but add date prop
     eventsWDate() {
@@ -352,8 +347,11 @@ export default {
   resize: both;
   overflow: none;
   border: solid 1px rgb(128,128,128,0.4);
+  
   text-align: center;
-  padding-right: 1px
+  display:flex;
+    align-items:center;
+        justify-content:center;
 }
 .name-container{
     border: solid 1px rgb(128,128,128,0.4);

@@ -1,22 +1,30 @@
 <template>
   <div id="app">
     <div class="info">
-      <div style="width:60%;">
+      <div style="width:40%;">
         <h1>WeekOverview</h1>
         <h3>
           <a href="https://github.com/ZelvaMan/canvas-calendar">Git hub</a>
         </h3>
       </div>
-      <div class="card">
-        <h3>zkratky</h3>
+      <div class="card collumns">
+      
         <p>
-          p == Pizza
-          <br />u == Uklid
-          <br />b == Bar
-          <br />s == Servis
-          <br />k == Kuchar
-          <br />
+          color of names <br/>equals color 
+          <br/>of lines 
+          <br/>in WeekOverview
         </p>
+        <div style="margin-left: 20px" >
+          <h3>zkratky</h3>
+          <p>
+            p == Pizza
+            <br />u == Uklid
+            <br />b == Bar
+            <br />s == Servis
+            <br />k == Kuchar
+            <br />
+          </p>
+        </div>
       </div>
     </div>
     <div class="flex-container">
@@ -118,9 +126,11 @@ export default {
   /* Add shadows to create the "card" effect */
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
-  width: 20%;
+  padding: 15px;
 }
-
+.collumns{
+  display: flex;
+  flex-direction: row;}
 /* On mouse-over, add a deeper shadow */
 .card:hover {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
