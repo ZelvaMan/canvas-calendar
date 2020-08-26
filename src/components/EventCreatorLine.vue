@@ -31,7 +31,7 @@ export default {
   name: "EventCreatorLine",
   data() {
     return {
-      eventsByDay: []
+      eventsByDay: [],
     };
   },
   props: {
@@ -44,19 +44,19 @@ export default {
     daysOfWeek: String,
     weekDateStart: String,
     NameSize: Number,
-    possisions: Array
+    possisions: Array,
   },
   watch: {
     events() {
       //* render events from this.events
       this.eventsByDay = this.eventsData(this.events);
       this.setTextAreasByEvents();
-    }
+    },
   },
   methods: {
     // sets default texts for textaras
     setTextAreasByEvents() {
-      this.eventsGroupedByDay.forEach(d => {
+      this.eventsGroupedByDay.forEach((d) => {
         //difference between start date an date, used to calculate textare ID
         var diff = this.daysDiff(this.weekDateStart, d.date);
         //get textarea ref based on days between date and weekDateStart
@@ -73,7 +73,7 @@ export default {
       var str = "";
 
       //foreach events and create string for each one and joint them together
-      events.forEach(e => {
+      events.forEach((e) => {
         var s = this.createEventString(e);
         str += s;
         str += "\n";
@@ -99,7 +99,7 @@ export default {
 
     //event handlerer for text areasa
     onChange(event) {
-      console.log("change vent fired")
+      console.log("change vent fired");
       this.onChangeHandler(event.target);
     },
     //methof fot hangeling onchange events
@@ -167,7 +167,7 @@ export default {
           end: times.end,
           color: this.resourceInfo.color,
           resource: this.resourceInfo.id,
-          possision: possision
+          possision: possision,
         };
         result = eventObject;
       } else {
@@ -211,13 +211,13 @@ export default {
       console.log(this.eventsToEmit());
       this.$emit("input", {
         resource: this.resourceInfo.id,
-        events: this.eventsToEmit()
+        events: this.eventsToEmit(),
       });
     },
     //* format events for emit => add all event to one array
     eventsToEmit() {
       var result = [];
-      this.eventsByDay.forEach(events => {
+      this.eventsByDay.forEach((events) => {
         result = result.concat(events.events);
       });
       return result;
@@ -236,7 +236,7 @@ export default {
       var tdate = moment(date, "MM/DD").format("MM/DD");
       var r = undefined;
       //foreach all event, return that datatr
-      array.forEach(d => {
+      array.forEach((d) => {
         if (d.date == tdate) {
           r = d;
           return;
@@ -269,7 +269,7 @@ export default {
       if (char == "b") return "Bar";
       if (char == "s") return "Servis";
       if (char == "k") return "Kuchar";
-    }
+    },
   },
   computed: {
     //create style for resourcename
@@ -278,7 +278,7 @@ export default {
         "color:" +
         this.resourceInfo.color +
         ";width:" +
-        (this.NameSize.toString()/1.7) +
+        this.NameSize.toString() / 1.7 +
         "rem;"
       );
     },
@@ -289,7 +289,7 @@ export default {
     //return events but add date prop
     eventsWDate() {
       var events = this.events;
-      events.forEach(e => {
+      events.forEach((e) => {
         e.date = moment(e.start, "YYYY/MM/DD HH:mm").format("MM/DD");
       });
       return events;
@@ -302,14 +302,14 @@ export default {
         .groupBy("date")
         .map((value, key) => ({
           date: key,
-          events: value
+          events: value,
         }))
         .value();
 
       var cdate = moment(this.weekDateStart, "YYYY/MM/DD").format("MM/DD");
       //! fills dates without events with empty object
       //! IMPORTANT for rendering
-      for (let i = 0; i < 5; i++) {
+      for (let i = 0; i < parseInt(this.daysOfWeek); i++) {
         //check if there are events with this date
         var d = this.haveDate(byDate, cdate);
         if (d != undefined) {
@@ -318,16 +318,14 @@ export default {
           //if there arent push object ith empty dates
           result.push({ date: cdate, events: [] });
         }
-        cdate = moment(cdate, "MM/DD")
-          .add(1, "d")
-          .format("MM/DD");
+        cdate = moment(cdate, "MM/DD").add(1, "d").format("MM/DD");
       }
       return result;
-    }
+    },
   },
   mounted() {
     this.setTextAreasByEvents();
-  }
+  },
 };
 </script>
 
@@ -346,14 +344,14 @@ export default {
   width: 7rem;
   resize: both;
   overflow: none;
-  border: solid 1px rgb(128,128,128,0.4);
-  
+  border: solid 1px rgb(128, 128, 128, 0.4);
+
   text-align: center;
-  display:flex;
-    align-items:center;
-        justify-content:center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.name-container{
-    border: solid 1px rgb(128,128,128,0.4);
+.name-container {
+  border: solid 1px rgb(128, 128, 128, 0.4);
 }
 </style>

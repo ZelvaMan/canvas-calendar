@@ -1,7 +1,8 @@
 <template>
   <div class="flex-container">
-    <div class="flex-dates-collumn">
-      <a href="http://keenmate.com/">
+    <div class="padding-dates">
+      <div class="flex-dates-collumn">
+        <!-- <a href="http://keenmate.com/">
         <div class="logo-container">
           <img src="../img/KeenmateLogo.png" style="height:25px; width:25px;" />
 
@@ -10,14 +11,14 @@
             <br />|MATE
           </b>
         </div>
-      </a>
-      <div class="date-container" v-for="i in 5" :key="i">
-        <p class="starttime-text">{{startTime}}</p>
-        <br />
+        </a>-->
+        <div class="date-container" v-for="i in parseInt(daysOfWeek, 10)" :key="i">
+          <i class="starttime-text">{{startTime}}</i>
 
-        <b class="date">{{moment(StartDate,"YYYY/MM/DD").add(i -1, 'd').format("DD.MM.")}}</b>
-        <br />
-        <p class="endtime-text">{{endTime}}</p>
+          <b class="date">{{moment(StartDate,"YYYY/MM/DD").add(i -1, 'd').format("DD.MM.")}}</b>
+
+          <i class="endtime-text">{{endTime}}</i>
+        </div>
       </div>
     </div>
     <PossisionCollumn
@@ -42,7 +43,7 @@ import PossisionCollumn from "./PossisionCollumn.vue";
 export default {
   name: "WeekOverview",
   components: {
-    PossisionCollumn
+    PossisionCollumn,
   },
   props: {
     startTime: String,
@@ -50,7 +51,7 @@ export default {
     events: Array,
     //date on which you want to start render week
     StartDate: String,
-    daysOfWeek: String
+    daysOfWeek: String,
   },
   computed: {
     //group events by possision
@@ -60,8 +61,8 @@ export default {
         .map((value, key) => ({ possision: key, events: value }))
         .value();
       return result;
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -85,7 +86,7 @@ export default {
   font-size: 1.2rem;
   height: 100%;
 }
-.date::after {
+.date-container::after {
   content: "";
   position: absolute;
   z-index: -1;
@@ -94,29 +95,28 @@ export default {
   top: 50%;
   border-top: 1px solid rgb(0, 0, 0, 0.3);
 }
+.padding-dates {
+  margin-top: 33px;
+}
 .date-container {
-  height: 20%;
-  padding: 5px;
+  padding: 0px 3px;
   border-top: 2px solid rgb(0, 0, 0, 0.4);
   position: relative;
-  display: grid;
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  flex-direction: column;
   grid-template-rows: 1rem auto 1rem;
 }
 .date {
-  grid-row: 2;
-  margin-top: 4px;
+  margin-top: -50%;
 }
 .starttime-text {
   font-size: 0.75rem;
   margin-block-start: 0rem;
-  grid-row: 1;
 }
 .endtime-text {
   font-size: 0.75rem;
-  align-items: end;
-  vertical-align: bottom;
-  margin-block-end: 0rem;
-  grid-row: 5;
 }
 .logo-container {
   display: flex;

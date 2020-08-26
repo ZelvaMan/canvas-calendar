@@ -1,12 +1,12 @@
 <template>
   <div class="container">
-    <div class="dates-container" >
+    <div class="dates-container">
       <div :style="'width:' + (getNameWidth/1.7).toString()  + 'rem;'" class="white-space"></div>
       <div
         class="date-container"
         v-for="n in parseInt(daysOfWeek)"
         :key="n"
-      >{{moment(startDate).add(n,"d").format("MM.DD.")}}</div>
+      >{{moment(startDate).add(n -1,"d").format("MM.DD.")}}</div>
     </div>
     <EventCreatorLine
       v-for="ri in resourceInfos"
@@ -33,11 +33,11 @@ import EventCreatorLine from "./EventCreatorLine";
 export default {
   name: "EventCreator",
   components: {
-    EventCreatorLine
+    EventCreatorLine,
   },
   data() {
     return {
-      eventsByResource: this.groupByResource()
+      eventsByResource: this.groupByResource(),
     };
   },
   props: {
@@ -48,12 +48,12 @@ export default {
     possisions: Array,
 
     startTime: String,
-    endTime: String
+    endTime: String,
   },
   watch: {
     events() {
       this.eventsByResource = this.groupByResource();
-    }
+    },
   },
   mounted() {},
   methods: {
@@ -64,7 +64,7 @@ export default {
 
     getResourceInfo(resource) {
       var res = null;
-      this.resourceInfos.forEach(rs => {
+      this.resourceInfos.forEach((rs) => {
         if (rs.id == resource) res = rs;
       });
       return res;
@@ -72,7 +72,7 @@ export default {
 
     getEventWithResource(resource) {
       var result = [];
-      this.eventsByResource.forEach(e => {
+      this.eventsByResource.forEach((e) => {
         if (e.resource == resource) result = e.events;
       });
       return result;
@@ -89,7 +89,7 @@ export default {
     eventsForEmit(groupedResource) {
       var events = [];
       var concated = false;
-      this.eventsByResource.forEach(r => {
+      this.eventsByResource.forEach((r) => {
         if (r.resource == groupedResource.resource) {
           //is resource curently emited
           concated = true;
@@ -102,16 +102,16 @@ export default {
         events = events.concat(groupedResource.events);
       }
       return events;
-    }
+    },
   },
   computed: {
     getNameWidth() {
-      var longest = this.resourceInfos.reduce(function(a, b) {
+      var longest = this.resourceInfos.reduce(function (a, b) {
         return a.name.length > b.name.length ? a : b;
       });
       return longest.name.length;
-    }
-  }
+    },
+  },
 };
 </script>
 <style scoped>
@@ -131,8 +131,8 @@ export default {
   width: 7rem;
   font-size: 16px;
 }
-.white-space{
-  margin:1px;
-  border-left:solid transparent 5px;
+.white-space {
+  margin: 1px;
+  border-left: solid transparent 5px;
 }
 </style>  

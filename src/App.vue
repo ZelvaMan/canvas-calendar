@@ -8,13 +8,13 @@
         </h3>
       </div>
       <div class="card collumns">
-      
         <p>
-          color of names <br/>equals color 
-          <br/>of lines 
-          <br/>in WeekOverview
+          color of names
+          <br />equals color
+          <br />of lines
+          <br />in WeekOverview
         </p>
-        <div style="margin-left: 20px" >
+        <div style="margin-left: 20px">
           <h3>zkratky</h3>
           <p>
             p == Pizza
@@ -34,10 +34,10 @@
         :events="events"
         StartDate="2020/08/10"
         :possisions="getPossisions"
-        daysOfWeek="5"
+        daysOfWeek="7"
       />
       <EventCreator
-        daysOfWeek="5"
+        daysOfWeek="7"
         v-on:input="addEvent"
         :startTime="startTime"
         :endTime="endTime"
@@ -56,34 +56,34 @@ import {
   dummyEventsForRenderTest,
   dummyEventsForEventCreator,
   dummyResourceInfoForEventCreator,
-  possisionList
+  possisionList,
 } from "./data/DummyData.js";
 export default {
   name: "App",
   components: {
     WeekOverview,
-    EventCreator
+    EventCreator,
   },
   data() {
     return {
       EventsForRenderTest: dummyEventsForRenderTest,
       EventCreatorData: {
         events: dummyEventsForEventCreator,
-        resourceInfo: dummyResourceInfoForEventCreator
+        resourceInfo: dummyResourceInfoForEventCreator,
       },
       eventCreatorEvents: [],
       dummyEventsBool: true,
       possisions: possisionList,
       events: [],
       startTime: "8:00",
-      endTime: "22:00"
+      endTime: "22:00",
     };
   },
   methods: {
     addEvent(events) {
       console.log(events);
       this.events = events;
-    }
+    },
   },
   computed: {
     getPossisions() {
@@ -92,12 +92,12 @@ export default {
       console.log(" get possisions:");
       console.log(p);
       return p;
-    }
+    },
   },
   mounted() {
     console.log(this.data);
     this.events = this.EventCreatorData.events;
-  }
+  },
 };
 </script>
 
@@ -128,9 +128,10 @@ export default {
   transition: 0.3s;
   padding: 15px;
 }
-.collumns{
+.collumns {
   display: flex;
-  flex-direction: row;}
+  flex-direction: row;
+}
 /* On mouse-over, add a deeper shadow */
 .card:hover {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
