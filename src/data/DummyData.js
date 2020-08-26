@@ -428,6 +428,37 @@ export const dummyResourceInfoForEventCreator = [{
     id: "C",
     possision: "Uklid"
   }
+  ,
+  {
+
+    color: "purple",
+    name: "Marek",
+    id: "D",
+    possision: "Bar"
+  },
+  {
+
+    color: "GOLD",
+    name: "Lukas",
+    id: "E",
+    possision: "Kuchar"
+  },
+  {
+
+    color: "LAWNGREEN",
+    name: "Filip",
+    id: "F",
+    possision: "Bar"
+  },
+  {
+
+    color: "CHOCOLATE ",
+    name: "Kuba",
+    id: "G",
+    possision: "KP"
+  }
+  
+
 ]
 // TODO add resource dictionary
 export const possisionList = ["KP", "Uklid", "Bar", "Servis", "Kuchar"]
