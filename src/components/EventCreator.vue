@@ -2,11 +2,11 @@
   <div class="container">
     <div class="dates-container">
       <div :style="'width:' + (getNameWidth/1.7).toString()  + 'rem;'" class="white-space"></div>
-      <div
-        class="date-container"
-        v-for="n in parseInt(daysOfWeek)"
-        :key="n"
-      >{{moment(startDate).add(n -1,"d").format("MM.DD.")}}</div>
+      <div class="date-container" v-for="n in parseInt(daysOfWeek)" :key="n">
+        {{moment(startDate).add(n -1,"d").format("MM.DD.")}}
+        <br />
+        <div style="font-size:0.6rem;">( {{moment(startDate).add(n -1,"d").format("dddd")}})</div>
+      </div>
     </div>
     <EventCreatorLine
       v-for="ri in resourceInfos"
