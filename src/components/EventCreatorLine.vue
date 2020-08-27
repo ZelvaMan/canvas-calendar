@@ -10,13 +10,13 @@
         :key="n"
         :ref="n"
         :id="   n+ '-' +resourceInfo.id "
-        type="text"
         v-on:blur="onChange"
-        v-on:keyup.space="onSpace"
-        oninput="this.style.height = '';this.style.height = this.scrollHeight + 'px'"
+        v-on:keydown.space="onEnter"
+        v-on:keydown.enter="onEnter"
         contenteditable="true"
         class="input"
       />
+      <div class="input" ref="hours"></div>
     </div>
   </div>
 </template>
@@ -24,6 +24,7 @@
 <script>
 import _ from "lodash";
 import Vue from "vue";
+import $ from "jquery";
 //import moment from "moment";
 Object.defineProperty(Vue.prototype, "$_", { value: _ });
 import moment from "moment";
@@ -66,6 +67,7 @@ export default {
         //set textare to that string
         textarea.innerText = str;
       });
+      this.$refs["hours"].innerText = this.totalHours.toString();
     },
     //create day string for events to be render in textareas
     createDayString(events) {
@@ -84,7 +86,12 @@ export default {
     createEventString(event) {
       //get start and end in right formats
       var start = moment(event.start, "YYYY/MM/DD HH:mm").format("HH:mm");
-      var end = moment(event.end, "HH:mm").format("HH:mm");
+      var end;
+      if (event.end == "cl") {
+        end = "cl";
+      } else {
+        end = moment(event.end, "HH:mm").format("HH:mm");
+      }
       var possision = "";
 
       //check if event have set different possision
@@ -192,18 +199,17 @@ export default {
       //end
       //* if end is cl(close) set time to endTime
       if (splitted[1] == "cl") {
-        result.end = this.endTime;
+        result.end = "cl";
       } else {
         result.end = moment(splitted[1], "HH:mm").format("HH:mm");
       }
       return result;
     },
-    //* space press handler will add new line to code
-    onSpace(e) {
-      e.preventDefault();
-      e.target.innerText += "\n";
-      e.target.innerText += "\n";
-      this.onChangeHandler(e.target);
+    //* enter and space press handler will add new line to code
+    onEnter(e) {
+      console.log("ON ENTER");
+      console.log(e.target.innerText);
+      // this.onChangeHandler(e.target);
     },
     //! emits events
     emit() {
@@ -264,14 +270,38 @@ export default {
       // });
       // return res;
       char = char.toLowerCase();
-      if (char == "p") return "Pizza";
+      if (char == "F") return "FOH";
       if (char == "u") return "Uklid";
-      if (char == "b") return "Bar";
-      if (char == "s") return "Servis";
-      if (char == "k") return "Kuchar";
+      if (char == "B") return "BOH";
     },
   },
   computed: {
+    //* return total number which this resource workde this week
+    totalHours() {
+      var result = 0;
+
+      console.log(this.resourceInfo.name);
+      this.events.forEach((e) => {
+        var start = moment(
+          moment(e.start, "YYYY/MM/DD HH:mm").format("HH:mm"),
+          "HH:mm"
+        );
+        var end = "";
+        if (e.end == "cl") {
+          end = moment(this.endTime, "HH:mm");
+        } else {
+          end = moment(e.end, "HH:mm");
+        }
+
+        var range = moment.duration(start.diff(end));
+        console.log(range);
+        var hours = range.asHours();
+        console.log(hours);
+        result += Math.abs(hours);
+      });
+      //console.log(result);
+      return result;
+    },
     //create style for resourcename
     colorStyleString() {
       return (
@@ -338,14 +368,13 @@ export default {
 }
 .input-container {
   display: flex;
-  height: auto;
 }
 .input {
   width: 7rem;
   resize: both;
   overflow: none;
   border: solid 1px rgb(128, 128, 128, 0.4);
-
+  font-weight: bolder;
   text-align: center;
   display: flex;
   align-items: center;

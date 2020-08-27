@@ -18,14 +18,14 @@ export default {
   data() {
     return {
       // transparen color, used for empty divs
-      tcolor: "rgba(0, 0, 0, 0);"
+      tcolor: "rgba(0, 0, 0, 0);",
     };
   },
   props: {
     startTime: String,
     endTime: String,
     //must have: start end color
-    events: Array
+    events: Array,
   },
   computed: {
     //make divs for every event , and spaces between events
@@ -50,17 +50,22 @@ export default {
       if (this.events != undefined) {
         divs = [];
 
-        this.events.forEach(e => {
+        this.events.forEach((e) => {
           //parese start and end objects from
           var eStartMoment = moment(e.start, "YYYY/MM/DD hh:mm");
           var eStart = {
             hour: eStartMoment.format("HH"),
-            minute: eStartMoment.format("mm")
+            minute: eStartMoment.format("mm"),
           };
-          var eEndMoment = moment(e.end, "hh:mm");
+          var eEndMoment;
+          if (e.end == "cl") {
+            eEndMoment = moment(this.endTime, "hh:mm");
+          } else {
+            eEndMoment = moment(e.end, "hh:mm");
+          }
           var eEnd = {
             hour: eEndMoment.format("HH"),
-            minute: eEndMoment.format("mm")
+            minute: eEndMoment.format("mm"),
           };
 
           //if is event bigger then range, set ti to full height
@@ -75,7 +80,7 @@ export default {
           var blankDiv = {
             color: this.tcolor,
             height: bDivHeigh,
-            id: ++id
+            id: ++id,
           };
           if (blankDiv.height != 0) {
             divs.push(blankDiv);
@@ -97,7 +102,7 @@ export default {
       }
 
       return divs;
-    }
+    },
   },
   methods: {
     //conmvert minutes to quarters  30= 2 ...
@@ -108,8 +113,8 @@ export default {
     createStyleString(div) {
       var v = "height:" + div.height + "%; background:" + div.color + ";";
       return v;
-    }
-  }
+    },
+  },
 };
 </script>
 

@@ -17,11 +17,10 @@
         <div style="margin-left: 20px">
           <h3>zkratky</h3>
           <p>
-            p == Pizza
+            f == FOH
             <br />u == Uklid
-            <br />b == Bar
-            <br />s == Servis
-            <br />k == Kuchar
+            <br />b == BOH
+            <br />cl == zaviracka
             <br />
           </p>
         </div>
