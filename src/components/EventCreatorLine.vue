@@ -53,6 +53,11 @@ export default {
       this.eventsByDay = this.eventsData(this.events);
       this.setTextAreasByEvents();
     },
+
+    startDate() {
+      this.eventsByDay = this.eventsData(this.events);
+      this.setTextAreasByEvents();
+    },
   },
   methods: {
     // sets default texts for textaras
@@ -207,8 +212,6 @@ export default {
     },
     //* enter and space press handler will add new line to code
     onEnter(e) {
-      console.log("ON ENTER");
-      console.log(e.target.innerText);
       // this.onChangeHandler(e.target);
     },
     //! emits events
@@ -270,17 +273,15 @@ export default {
       // });
       // return res;
       char = char.toLowerCase();
-      if (char == "F") return "FOH";
+      if (char == "f") return "FOH";
       if (char == "u") return "Uklid";
-      if (char == "B") return "BOH";
+      if (char == "b") return "BOH";
     },
   },
   computed: {
     //* return total number which this resource workde this week
     totalHours() {
       var result = 0;
-
-      console.log(this.resourceInfo.name);
       this.events.forEach((e) => {
         var start = moment(
           moment(e.start, "YYYY/MM/DD HH:mm").format("HH:mm"),
@@ -294,9 +295,7 @@ export default {
         }
 
         var range = moment.duration(start.diff(end));
-        console.log(range);
         var hours = range.asHours();
-        console.log(hours);
         result += Math.abs(hours);
       });
       //console.log(result);
@@ -370,7 +369,7 @@ export default {
   display: flex;
 }
 .input {
-  width: 7rem;
+  width: 6rem;
   resize: both;
   overflow: none;
   border: solid 1px rgb(128, 128, 128, 0.4);
