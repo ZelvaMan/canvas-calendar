@@ -16,7 +16,7 @@
         contenteditable="true"
         class="input"
       />
-      <div class="input" ref="hours"></div>
+      <div class="input total-hours" ref="hours"></div>
     </div>
   </div>
 </template>
@@ -382,5 +382,8 @@ export default {
 }
 .name-container {
   border: solid 1px rgb(128, 128, 128, 0.4);
+}
+.total-hours {
+  background: #c0c0c0;
 }
 </style>
