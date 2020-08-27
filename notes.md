@@ -5,11 +5,6 @@
 - change date
 
 ## todo  EventCreaetor
-- change to table 
-- delete lines between people
-- add vertical lines
-- bigger font size
-- all bold
-- static width(12 rem)
-- add proper cl support
 - add disabled days
+- add total hours in week and mount
+- when changed date refresh
