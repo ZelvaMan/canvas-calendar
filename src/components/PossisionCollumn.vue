@@ -10,6 +10,7 @@
     ></LineContainer>
   </div>
 </template>
+
 <script>
 import _ from "lodash";
 import Vue from "vue";
@@ -18,22 +19,20 @@ Object.defineProperty(Vue.prototype, "$_", { value: _ });
 import LineContainer from "./LineContainer.vue";
 export default {
   name: "PossisionCollumn",
-  components: {
-    LineContainer
-  },
+  components: { LineContainer },
   props: {
     startTime: String,
     endTime: String,
     possision: String,
     events: Array,
-    StartDate: String,
-    daysOfWeek: String
+    startDate: String,
+    daysOfWeek: String,
   },
   computed: {
     //add date property based on start to every event
     eventsWDate() {
       var events = this.events;
-      events.forEach(e => {
+      events.forEach((e) => {
         e.date = moment(e.start, "YYYY/MM/DD").format("MM/DD");
       });
       return events;
@@ -51,7 +50,9 @@ export default {
         .value();
 
       //curent date for foreach
-      var curDate = moment("2020/8/10", "YYYY/MM/DD").format("MM/DD");
+      var curDate = moment(/*this.startDate*/ "2020/8/10", "YYYY/MM/DD").format(
+        "MM/DD"
+      );
 
       //foeach
       for (let i = 0; i < this.daysOfWeek; i++) {
@@ -66,15 +67,13 @@ export default {
           result.push({ date: curDate, events: [] });
         }
         //add one day ti curdate
-        curDate = moment(curDate, "MM/DD")
-          .add(1, "d")
-          .format("MM/DD");
+        curDate = moment(curDate, "MM/DD").add(1, "d").format("MM/DD");
       }
 
       // console.log("grouped by day ");
       // console.log(result);
       return result;
-    }
+    },
   },
   methods: {
     //return all events from array with matching date
@@ -83,17 +82,18 @@ export default {
       var tdate = moment(date, "MM/DD").format("MM/DD");
 
       var r = undefined;
-      array.forEach(d => {
+      array.forEach((d) => {
         if (d.date == tdate) {
           r = d;
           return;
         }
       });
       return r;
-    }
-  }
+    },
+  },
 };
 </script>
+
 <style scoped>
 .flex-possision-collumn {
   width: auto;

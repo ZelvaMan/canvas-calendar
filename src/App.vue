@@ -6,22 +6,22 @@
         <h3>
           <a href="https://github.com/ZelvaMan/canvas-calendar">Git hub</a>
         </h3>
+        <button class="btn" v-on:click="removeWeek()">previous week</button>
+        <button class="btn" v-on:click="addWeek()">next week</button>
       </div>
       <div class="card collumns">
         <p>
-          color of names
-          <br />equals color
-          <br />of lines
-          <br />in WeekOverview
+          Barvy jmen
+          <br />odpovidaji
+          <br />barvam car
         </p>
         <div style="margin-left: 20px">
           <h3>zkratky</h3>
           <p>
-            p == Pizza
+            f == FOH
             <br />u == Uklid
-            <br />b == Bar
-            <br />s == Servis
-            <br />k == Kuchar
+            <br />b == BOH
+            <br />cl == zaviracka
             <br />
           </p>
         </div>
@@ -32,7 +32,7 @@
         :startTime="startTime"
         :endTime="endTime"
         :events="events"
-        StartDate="2020/08/10"
+        :startDate="date"
         :possisions="getPossisions"
         daysOfWeek="7"
       />
@@ -43,13 +43,14 @@
         :endTime="endTime"
         :events="events"
         :resourceInfos="EventCreatorData.resourceInfo"
-        startDate="2020/08/10"
+        :startDate="date"
       ></EventCreator>
     </div>
   </div>
 </template>
 
 <script>
+import moment from "moment";
 import WeekOverview from "./components/WeekOverview.vue";
 import EventCreator from "./components/EventCreator";
 import {
@@ -77,12 +78,23 @@ export default {
       events: [],
       startTime: "8:00",
       endTime: "22:00",
+      date: "2020/08/10",
     };
   },
   methods: {
     addEvent(events) {
       console.log(events);
       this.events = events;
+    },
+    removeWeek() {
+      this.date = moment(this.date, "YYYY/MM/DD")
+        .add(-7, "d")
+        .format("YYYY/MM/DD");
+    },
+    addWeek() {
+      this.date = moment(this.date, "YYYY/MM/DD")
+        .add(7, "d")
+        .format("YYYY/MM/DD");
     },
   },
   computed: {
@@ -96,6 +108,7 @@ export default {
   },
   mounted() {
     console.log(this.data);
+    moment.locale("cs");
     this.events = this.EventCreatorData.events;
   },
 };
@@ -121,6 +134,33 @@ export default {
 .info {
   flex-direction: collumn;
   display: flex;
+}
+.btn {
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  border-radius: 4px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.btn.focus,
+.btn:focus,
+.btn:hover {
+  color: #333;
+  text-decoration: none;
 }
 .card {
   /* Add shadows to create the "card" effect */

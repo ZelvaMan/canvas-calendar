@@ -15,7 +15,7 @@
         <div class="date-container" v-for="i in parseInt(daysOfWeek, 10)" :key="i">
           <i class="starttime-text">{{startTime}}</i>
 
-          <b class="date">{{moment(StartDate,"YYYY/MM/DD").add(i -1, 'd').format("DD.MM.")}}</b>
+          <b class="date">{{moment(startDate,"YYYY/MM/DD").add(i -1, 'd').format("DD.MM.")}}</b>
 
           <i class="endtime-text">{{endTime}}</i>
         </div>
@@ -28,7 +28,7 @@
       :startTime="startTime"
       :endTime="endTime"
       :events="e.events"
-      beginningDate="	2020/08/10"
+      :startDate="startDate"
       :daysOfWeek="daysOfWeek"
     ></PossisionCollumn>
   </div>
@@ -50,7 +50,7 @@ export default {
     endTime: String,
     events: Array,
     //date on which you want to start render week
-    StartDate: String,
+    startDate: String,
     daysOfWeek: String,
   },
   computed: {

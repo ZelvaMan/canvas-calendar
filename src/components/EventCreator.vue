@@ -2,11 +2,17 @@
   <div class="container">
     <div class="dates-container">
       <div :style="'width:' + (getNameWidth/1.7).toString()  + 'rem;'" class="white-space"></div>
-      <div
-        class="date-container"
-        v-for="n in parseInt(daysOfWeek)"
-        :key="n"
-      >{{moment(startDate).add(n -1,"d").format("MM.DD.")}}</div>
+      <div class="date-container" v-for="n in parseInt(daysOfWeek)" :key="n">
+        {{moment(startDate).add(n -1,"d").format("MM.DD.")}}
+        <br />
+        <div style="font-size:0.8rem;">( {{moment(startDate).add(n -1,"d").format("dddd")}})</div>
+      </div>
+      <div class="date-container">
+        <b>
+          celkem
+          <br />hodin
+        </b>
+      </div>
     </div>
     <EventCreatorLine
       v-for="ri in resourceInfos"
@@ -129,7 +135,6 @@ export default {
 .date-container {
   margin: 1px;
   width: 7rem;
-  font-size: 16px;
 }
 .white-space {
   margin: 1px;
