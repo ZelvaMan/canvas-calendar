@@ -54,7 +54,8 @@ export default {
       this.setTextAreasByEvents();
     },
 
-    startDate() {
+    weekDateStart() {
+      console.log("weekDateStart changed");
       this.eventsByDay = this.eventsData(this.events);
       this.setTextAreasByEvents();
     },

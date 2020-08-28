@@ -42,7 +42,7 @@ export default {
     eventsGroupedByDay() {
       var result = [];
       var events = this.eventsWDate;
-
+      var sdate = this.startDate;
       //group events by date
       var byDate = this.$_.chain(events)
         .groupBy("date")

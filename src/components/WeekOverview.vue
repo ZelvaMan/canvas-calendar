@@ -38,6 +38,8 @@
 import _ from "lodash";
 import Vue from "vue";
 //import moment from "moment";
+
+import moment from "moment";
 Object.defineProperty(Vue.prototype, "$_", { value: _ });
 import PossisionCollumn from "./PossisionCollumn.vue";
 export default {
@@ -56,7 +58,18 @@ export default {
   computed: {
     //group events by possision
     eventsGroupByPossision() {
-      var result = this.$_.chain(this.events)
+      var sdate = this.startDate;
+      var visibleEvents = [];
+
+      var inWeek = moment(this.startDate)
+        .add(this.daysOfWeek, "days")
+        .format("YYYY/MM/DD");
+      this.events.forEach((e) => {
+        if (moment(e.start).isBetween(this.startDate, inWeek)) {
+          visibleEvents.push(e);
+        }
+      });
+      var result = this.$_.chain(visibleEvents)
         .groupBy("possision")
         .map((value, key) => ({ possision: key, events: value }))
         .value();

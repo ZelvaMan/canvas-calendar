@@ -33,6 +33,8 @@
 <script>
 import _ from "lodash";
 import Vue from "vue";
+
+import moment from "moment";
 //import moment from "moment";
 Object.defineProperty(Vue.prototype, "$_", { value: _ });
 import EventCreatorLine from "./EventCreatorLine";
@@ -78,8 +80,19 @@ export default {
 
     getEventWithResource(resource) {
       var result = [];
+      var events = [];
+      var inWeek = moment(this.startDate)
+        .add(this.daysOfWeek, "days")
+        .format("YYYY/MM/DD");
       this.eventsByResource.forEach((e) => {
-        if (e.resource == resource) result = e.events;
+        if (e.resource == resource) {
+          events = e.events;
+        }
+      });
+      events.forEach((e) => {
+        if (moment(e.start).isBetween(this.startDate, inWeek)) {
+          result.push(e);
+        }
       });
       return result;
     },
