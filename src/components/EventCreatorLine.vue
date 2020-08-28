@@ -220,6 +220,8 @@ export default {
       console.log("emitting ");
       console.log(this.eventsToEmit());
       this.$emit("input", {
+        startDate: this.weekDateStart,
+        daysOfWeek: this.daysOfWeek,
         resource: this.resourceInfo.id,
         events: this.eventsToEmit(),
       });

@@ -1,412 +1,3 @@
-export const dummyEventsForRenderTest = [{
-  start: "	2020/08/13 10:00 ",
-  end: "14:00",
-  color: "blue",
-  resource: "A",
-  possision: "FOH"
-}, {
-  start: " 	2020/08/13 15:00",
-  end: "18:00",
-  color: "blue",
-  resource: "A",
-  possision: "FOH"
-}, {
-  start: " 	2020/08/10 10:00",
-  end: "17:00",
-  color: "red",
-  resource: "B",
-  possision: "FOH"
-}, {
-  start: "	2020/08/13 18:00",
-  end: "20:00",
-  color: "red",
-  resource: "B",
-  possision: "FOH"
-}, {
-  start: "	2020/08/14 10:00 ",
-  end: "14:00",
-  color: "blue",
-  resource: "A",
-  possision: "FOH"
-}, {
-  start: " 	2020/08/12 15:00",
-  end: "18:00",
-  color: "green",
-  resource: "C",
-  possision: "FOH"
-}, {
-  start: " 	2020/08/15 10:00",
-  end: "17:00",
-  color: "red",
-  resource: "B",
-  possision: "FOH"
-}, {
-  start: "	2020/08/12 18:00",
-  end: "20:00",
-  color: "red",
-  resource: "B",
-  possision: "FOH"
-}, {
-  start: "	2020/08/13 10:00 ",
-  end: "14:00",
-  color: "green",
-  resource: "C",
-  possision: "FOH"
-}, {
-  start: " 	2020/08/10 15:00",
-  end: "18:00",
-  color: "blue",
-  resource: "A",
-  possision: "FOH"
-}, {
-  start: " 	2020/08/13 10:00",
-  end: "17:00",
-  color: "red",
-  resource: "B",
-  possision: "FOH"
-}, {
-  start: "	2020/08/11 18:00",
-  end: "20:00",
-  color: "red",
-  resource: "B",
-  possision: "FOH"
-}, {
-  start: "	2020/08/14 10:00 ",
-  end: "14:00",
-  color: "blue",
-  resource: "A",
-  possision: "FOH"
-}, {
-  start: " 	2020/08/12 15:00",
-  end: "18:00",
-  color: "green",
-  resource: "C",
-  possision: "FOH"
-}, {
-  start: " 	2020/08/10 10:00",
-  end: "17:00",
-  color: "red",
-  resource: "B",
-  possision: "FOH"
-}, {
-  start: "	2020/08/11 18:00",
-  end: "20:00",
-  color: "red",
-  resource: "B",
-  possision: "BOH"
-}, {
-  start: " 	2020/08/11 10:00",
-  end: "20:00",
-  color: "purple",
-  resource: "D",
-  possision: "BOH"
-}, {
-  start: "  2020/08/13 12:00 ",
-  end: "14:00",
-  color: "blue",
-  resource: "A",
-  possision: "BOH"
-}, {
-  start: "  2020/08/13 15:00",
-  end: "18:00",
-  color: "blue",
-  resource: "A",
-  possision: "BOH"
-}, {
-  start: "  2020/08/12 12:00",
-  end: "17:00",
-  color: "red",
-  resource: "B",
-  possision: "BOH"
-}, {
-  start: "  2020/08/13 18:00",
-  end: "20:00",
-  color: "red",
-  resource: "B",
-  possision: "BOH"
-}, {
-  start: "  2020/08/14 12:00 ",
-  end: "14:00",
-  color: "blue",
-  resource: "A",
-  possision: "BOH"
-}, {
-  start: "  2020/08/14 15:00",
-  end: "18:00",
-  color: "green",
-  resource: "C",
-  possision: "BOH"
-}, {
-  start: "  2020/08/15 12:00",
-  end: "17:00",
-  color: "red",
-  resource: "B",
-  possision: "BOH"
-}, {
-  start: "  2020/08/14 18:00",
-  end: "20:00",
-  color: "red",
-  resource: "B",
-  possision: "BOH"
-}, {
-  start: "  2020/08/13 12:00 ",
-  end: "14:00",
-  color: "green",
-  resource: "C",
-  possision: "BOH"
-}, {
-  start: "  2020/08/12 15:00",
-  end: "18:00",
-  color: "blue",
-  resource: "A",
-  possision: "BOH"
-}, {
-  start: "  2020/08/13 12:00",
-  end: "17:00",
-  color: "red",
-  resource: "B",
-  possision: "BOH"
-}, {
-  start: "  2020/08/14 18:00",
-  end: "20:00",
-  color: "red",
-  resource: "B",
-  possision: "BOH"
-}, {
-  start: "  2020/08/11 12:00 ",
-  end: "14:00",
-  color: "blue",
-  resource: "A",
-  possision: "BOH"
-}, {
-  start: "  2020/08/14 15:00",
-  end: "18:00",
-  color: "green",
-  resource: "C",
-  possision: "BOH"
-}, {
-  start: "  2020/08/12 12:00",
-  end: "17:00",
-  color: "red",
-  resource: "B",
-  possision: "BOH"
-}, {
-  start: "  2020/08/11 18:00",
-  end: "20:00",
-  color: "red",
-  resource: "B",
-  possision: "BOH"
-}, {
-  start: "  2020/08/11 12:00",
-  end: "20:00",
-  color: "purple",
-  resource: "D",
-  possision: "BOH"
-}, {
-  start: "	2020/08/13 10:00 ",
-  end: "19:00",
-  color: "blue",
-  resource: "A",
-  possision: "Bar"
-}, {
-  start: " 	2020/08/13 15:00",
-  end: "18:00",
-  color: "blue",
-  resource: "A",
-  possision: "Bar"
-}, {
-  start: " 	2020/08/10 10:00",
-  end: "17:00",
-  color: "red",
-  resource: "B",
-  possision: "Bar"
-}, {
-  start: "	2020/08/13 18:00",
-  end: "19:00",
-  color: "red",
-  resource: "B",
-  possision: "Bar"
-}, {
-  start: "	2020/08/14 10:00 ",
-  end: "18:00",
-  color: "blue",
-  resource: "A",
-  possision: "Bar"
-}, {
-  start: " 	2020/08/12 15:00",
-  end: "18:00",
-  color: "green",
-  resource: "C",
-  possision: "Bar"
-}, {
-  start: " 	2020/08/15 10:00",
-  end: "17:00",
-  color: "red",
-  resource: "B",
-  possision: "Bar"
-}, {
-  start: "	2020/08/12 18:00",
-  end: "20:00",
-  color: "red",
-  resource: "B",
-  possision: "Bar"
-}, {
-  start: "	2020/08/13 10:00 ",
-  end: "14:00",
-  color: "green",
-  resource: "C",
-  possision: "Bar"
-}, {
-  start: " 	2020/08/10 15:00",
-  end: "18:00",
-  color: "blue",
-  resource: "A",
-  possision: "Bar"
-}, {
-  start: " 	2020/08/13 10:00",
-  end: "17:00",
-  color: "red",
-  resource: "B",
-  possision: "Bar"
-}, {
-  start: "	2020/08/11 18:00",
-  end: "20:00",
-  color: "red",
-  resource: "B",
-  possision: "Bar"
-}, {
-  start: "	2020/08/14 10:00 ",
-  end: "14:00",
-  color: "blue",
-  resource: "A",
-  possision: "Bar"
-}, {
-  start: " 	2020/08/12 15:00",
-  end: "18:00",
-  color: "green",
-  resource: "C",
-  possision: "Bar"
-}, {
-  start: " 	2020/08/10 10:00",
-  end: "17:00",
-  color: "red",
-  resource: "B",
-  possision: "Bar"
-}, {
-  start: "	2020/08/11 18:00",
-  end: "20:00",
-  color: "red",
-  resource: "B",
-  possision: "Bar"
-}, {
-  start: " 	2020/08/11 10:00",
-  end: "20:00",
-  color: "purple",
-  resource: "D",
-  possision: "Servise"
-}, {
-  start: "  2020/08/13 12:00 ",
-  end: "14:00",
-  color: "blue",
-  resource: "A",
-  possision: "Servise"
-}, {
-  start: "  2020/08/13 15:00",
-  end: "18:00",
-  color: "blue",
-  resource: "A",
-  possision: "Servise"
-}, {
-  start: "  2020/08/12 12:00",
-  end: "17:00",
-  color: "red",
-  resource: "B",
-  possision: "Servise"
-}, {
-  start: "  2020/08/13 18:00",
-  end: "20:00",
-  color: "red",
-  resource: "B",
-  possision: "Servise"
-}, {
-  start: "  2020/08/14 12:00 ",
-  end: "14:00",
-  color: "blue",
-  resource: "A",
-  possision: "Servise"
-}, {
-  start: "  2020/08/14 15:00",
-  end: "18:00",
-  color: "green",
-  resource: "C",
-  possision: "Servise"
-}, {
-  start: "  2020/08/15 12:00",
-  end: "17:00",
-  color: "red",
-  resource: "B",
-  possision: "Servise"
-}, {
-  start: "  2020/08/14 18:00",
-  end: "20:00",
-  color: "red",
-  resource: "B",
-  possision: "Servise"
-}, {
-  start: "  2020/08/13 12:00 ",
-  end: "14:00",
-  color: "green",
-  resource: "C",
-  possision: "Servise"
-}, {
-  start: "  2020/08/12 15:00",
-  end: "18:00",
-  color: "blue",
-  resource: "A",
-  possision: "Servise"
-}, {
-  start: "  2020/08/13 12:00",
-  end: "17:00",
-  color: "red",
-  resource: "B",
-  possision: "Servise"
-}, {
-  start: "  2020/08/14 18:00",
-  end: "20:00",
-  color: "red",
-  resource: "B",
-  possision: "Servise"
-}, {
-  start: "  2020/08/11 12:00 ",
-  end: "14:00",
-  color: "blue",
-  resource: "A",
-  possision: "Servise"
-}, {
-  start: "  2020/08/14 15:00",
-  end: "18:00",
-  color: "green",
-  resource: "C",
-  possision: "Servise"
-}, {
-  start: "  2020/08/12 12:00",
-  end: "17:00",
-  color: "red",
-  resource: "B",
-  possision: "Servise"
-}, {
-  start: "  2020/08/11 18:00",
-  end: "20:00",
-  color: "red",
-  resource: "B",
-  possision: "Servise"
-}, {
-  start: "  2020/08/11 12:00",
-  end: "20:00",
-  color: "purple",
-  resource: "D",
-  possision: "Servise"
-}]
 export const dummyResourceInfoForEventCreator = [{
 
     color: "blue",
@@ -441,8 +32,8 @@ export const dummyResourceInfoForEventCreator = [{
     id: "C",
     possision: "Uklid"
   }
-  
-  
+
+
 
 ]
 // TODO add resource dictionary
@@ -586,6 +177,148 @@ export const dummyEventsForEventCreator = [
     possision: "FOH"
   }, {
     start: "	2020/08/16 14:00 ",
+    end: "cl",
+    color: "GOLD",
+    resource: "D",
+    possision: "FOH"
+  },
+  //A  
+  {
+    start: "    2020/08/17 8:00 ",
+    end: "16:00",
+    color: "red",
+    resource: "A",
+    possision: "FOH"
+  }, {
+    start: "    2020/08/18 8:00 ",
+    end: "16:00",
+    color: "red",
+    resource: "A",
+    possision: "FOH"
+  }, {
+    start: "    2020/08/19 8:00 ",
+    end: "11:00",
+    color: "red",
+    resource: "A",
+    possision: "FOH"
+  }, {
+    start: "    2020/08/20 8:00 ",
+    end: "16:00",
+    color: "red",
+    resource: "A",
+    possision: "FOH"
+  }, {
+    start: "    2020/08/21 8:00 ",
+    end: "16:00",
+    color: "red",
+    resource: "A",
+    possision: "FOH"
+  }, {
+    start: "    2020/08/22 8:00 ",
+    end: "16:00",
+    color: "red",
+    resource: "A",
+    possision: "FOH"
+  }, {
+    start: "    2020/08/23 8:00 ",
+    end: "16:00",
+    color: "red",
+    resource: "A",
+    possision: "FOH"
+  },
+  //! --------------------------------------------------------------------
+  //! B
+  {
+    start: "    2020/08/17 17:00 ",
+    end: "cl",
+    color: "blue",
+    resource: "B",
+    possision: "BOH"
+  }, {
+    start: "    2020/08/18 11:00 ",
+    end: "14:00",
+    color: "blue",
+    resource: "B",
+    possision: "BOH"
+  }, {
+    start: "    2020/08/19 17:00 ",
+    end: "cl",
+    color: "blue",
+    resource: "B",
+    possision: "BOH"
+  }, {
+    start: "    2020/08/20 8:00 ",
+    end: "14:00",
+    color: "blue",
+    resource: "B",
+    possision: "BOH"
+  },
+  {
+    start: "    2020/08/20 16:00 ",
+    end: "cl",
+    color: "blue",
+    resource: "B",
+    possision: "BOH"
+  }, {
+    start: "    2020/08/21 17:00 ",
+    end: "20:00",
+    color: "blue",
+    resource: "B",
+    possision: "BOH"
+  }, {
+    start: "    2020/08/22 8:00 ",
+    end: "14:00",
+    color: "blue",
+    resource: "B",
+    possision: "BOH"
+  }, {
+    start: "    2020/08/23 9:00 ",
+    end: "14:00",
+    color: "blue",
+    resource: "B",
+    possision: "BOH"
+  },
+
+  //! --------------------------------------------------------------------
+  //! D
+  {
+    start: "    2020/08/17 14:00 ",
+    end: "cl",
+    color: "GOLD",
+    resource: "D",
+    possision: "FOH"
+  }, {
+    start: "    2020/08/18 15:00 ",
+    end: "cl",
+    color: "GOLD",
+    resource: "D",
+    possision: "FOH"
+  }, {
+    start: "    2020/08/19 17:00 ",
+    end: "cl",
+    color: "GOLD",
+    resource: "D",
+    possision: "FOH"
+  }, {
+    start: "    2020/08/20 14:00 ",
+    end: "20:00",
+    color: "GOLD",
+    resource: "D",
+    possision: "FOH"
+  }, {
+    start: "    2020/08/21 14:00 ",
+    end: "cl",
+    color: "GOLD",
+    resource: "D",
+    possision: "FOH"
+  }, {
+    start: "    2020/08/22 14:00 ",
+    end: "cl",
+    color: "GOLD",
+    resource: "D",
+    possision: "FOH"
+  }, {
+    start: "    2020/08/23 14:00 ",
     end: "cl",
     color: "GOLD",
     resource: "D",

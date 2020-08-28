@@ -108,11 +108,37 @@ export default {
     eventsForEmit(groupedResource) {
       var events = [];
       var concated = false;
+      console.log(groupedResource);
       this.eventsByResource.forEach((r) => {
+        console.log(r);
         if (r.resource == groupedResource.resource) {
-          //is resource curently emited
+          console.log("Emminted possision");
+          //* is resource curently emited
+          var eventsForResource = [];
           concated = true;
-          events = events.concat(groupedResource.events);
+          var inWeek = moment(groupedResource.startDate)
+            .add(groupedResource.daysOfWeek, "days")
+            .format("YYYY/MM/DD");
+          var sd = moment(groupedResource.startDate)
+            .add(-1, "days")
+            .format("YYYY/MM/DD");
+          console.log(inWeek);
+          //* foreach all event with that resource
+          r.events.forEach((e) => {
+            //! events isnt from that week
+            if (!moment(e.start, "YYYY/MM/DD").isBetween(sd, inWeek)) {
+              //! add event to events for resourcec
+              eventsForResource.push(e);
+              console.log("isnt between ");
+              console.log(e);
+            }
+          });
+          //
+          console.log("added events that arent from that week");
+          console.log(eventsForResource);
+          //ad events from emit
+          eventsForResource = eventsForResource.concat(groupedResource.events);
+          events = events.concat(eventsForResource);
         } else {
           events = events.concat(r.events);
         }

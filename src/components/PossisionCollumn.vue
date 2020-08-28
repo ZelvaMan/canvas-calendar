@@ -50,9 +50,7 @@ export default {
         .value();
 
       //curent date for foreach
-      var curDate = moment(/*this.startDate*/ "2020/8/10", "YYYY/MM/DD").format(
-        "MM/DD"
-      );
+      var curDate = moment(this.startDate, "YYYY/MM/DD").format("MM/DD");
 
       //foeach
       for (let i = 0; i < this.daysOfWeek; i++) {

@@ -76,6 +76,8 @@ export default {
           var bDivHeigh = (eStart.hour - lastEventEnd) * pPHour;
           bDivHeigh -= this.minToQuarter(lastEventMinute) * pPQuarter;
           bDivHeigh += this.minToQuarter(eStart.minute) * pPQuarter;
+          console.log(e);
+          console.log(bDivHeigh);
           //fill blank space between last event end and this
           var blankDiv = {
             color: this.tcolor,
