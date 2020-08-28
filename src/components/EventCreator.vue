@@ -134,7 +134,7 @@ export default {
 
 .date-container {
   margin: 1px;
-  width: 7rem;
+  width: 6rem;
 }
 .white-space {
   margin: 1px;
