@@ -1,5 +1,14 @@
 <template>
   <div id="app">
+  <div class="header">
+  <h1>WeekOverview</h1>
+
+        <div class="buttons">
+        <button class="btn" v-on:click="removeWeek()">previous week</button>
+        <button class="btn" v-on:click="addWeek()">next week</button>
+        </div>
+  </div>
+
     <div class="flex-container">
       <WeekOverview
           :startTime="startTime"
@@ -11,24 +20,22 @@
       />
     
     <div class="right-container">
+     <EventCreator
+          daysOfWeek="7"
+          v-on:input="addEvent"
+          :startTime="startTime"
+          :endTime="endTime"
+          :events="events"
+          :resourceInfos="EventCreatorData.resourceInfo"
+          :startDate="date"
+        ></EventCreator>
       <div class="info">
-        <div class="vertical">
-        <h1>WeekOverview</h1>
-        <h3>
-          <a href="https://github.com/ZelvaMan/canvas-calendar">Git hub</a>
-        </h3>
-
-        <div class="buttons">
-        <button class="btn" v-on:click="removeWeek()">previous week</button>
-        <button class="btn" v-on:click="addWeek()">next week</button>
-        </div>
-        </div>
-
-              <div class="card collumns">
+        
+      <div class="card collumns">
         <p>
           Barvy jmen
-          <br />odpovidaji
-          <br />barvam car
+          odpovidaji
+          barvam car
         </p>
         <div style="margin-left: 20px">
           <h3>zkratky</h3>
@@ -39,22 +46,16 @@
             <br />cl == zaviracka
             <br />
           </p>
-        </div>
+        
         </div>
          
         
-    </div>
-     <EventCreator
-          daysOfWeek="7"
-          v-on:input="addEvent"
-          :startTime="startTime"
-          :endTime="endTime"
-          :events="events"
-          :resourceInfos="EventCreatorData.resourceInfo"
-          :startDate="date"
-        ></EventCreator>
+      </div>
+      </div>
+    
     </div>
     </div>
+  
   </div>
 </template>
 
@@ -146,7 +147,7 @@ export default {
   display: inline-block;
   margin-bottom: 0;
   font-weight: 400;
-  width:50%;
+  height: 1.5rem;
   text-align: center;
   white-space: nowrap;
   vertical-align: middle;
@@ -163,6 +164,7 @@ export default {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  
 }
 .btn.focus,
 .btn:focus,
@@ -174,8 +176,10 @@ export default {
   /* Add shadows to create the "card" effect */
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
-  padding: 15px;
+  padding: 5% 15px;
   margin-left: 45px;
+  margin-top: 30px;
+  width:90%;
 }
 .collumns {
   display: flex;
@@ -197,5 +201,12 @@ export default {
 .buttons{
   flex-direction: row;
   display:flex;
+   align-items: center;
+  margin-left: 25px;
+}
+.header{
+  flex-direction: row;
+  display:flex;
+  
 }
 </style>
