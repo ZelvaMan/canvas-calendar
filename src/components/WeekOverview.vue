@@ -86,6 +86,7 @@ export default {
   flex-direction: row;
   width: auto;
   height: 100%;
+  min-height:650px;
   flex-wrap: nowrap;
   border-style: solid;
   border-width: 2px;

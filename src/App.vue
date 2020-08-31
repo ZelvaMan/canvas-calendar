@@ -1,15 +1,30 @@
 <template>
   <div id="app">
-    <div class="info">
-      <div style="width:40%;">
+    <div class="flex-container">
+      <WeekOverview
+          :startTime="startTime"
+          :endTime="endTime"
+          :events="events"
+          :startDate="date"
+          :possisions="getPossisions"
+          daysOfWeek="7"
+      />
+    
+    <div class="right-container">
+      <div class="info">
+        <div class="vertical">
         <h1>WeekOverview</h1>
         <h3>
           <a href="https://github.com/ZelvaMan/canvas-calendar">Git hub</a>
         </h3>
+
+        <div class="buttons">
         <button class="btn" v-on:click="removeWeek()">previous week</button>
         <button class="btn" v-on:click="addWeek()">next week</button>
-      </div>
-      <div class="card collumns">
+        </div>
+        </div>
+
+              <div class="card collumns">
         <p>
           Barvy jmen
           <br />odpovidaji
@@ -25,26 +40,20 @@
             <br />
           </p>
         </div>
-      </div>
+        </div>
+         
+        
     </div>
-    <div class="flex-container">
-      <WeekOverview
-        :startTime="startTime"
-        :endTime="endTime"
-        :events="events"
-        :startDate="date"
-        :possisions="getPossisions"
-        daysOfWeek="7"
-      />
-      <EventCreator
-        daysOfWeek="7"
-        v-on:input="addEvent"
-        :startTime="startTime"
-        :endTime="endTime"
-        :events="events"
-        :resourceInfos="EventCreatorData.resourceInfo"
-        :startDate="date"
-      ></EventCreator>
+     <EventCreator
+          daysOfWeek="7"
+          v-on:input="addEvent"
+          :startTime="startTime"
+          :endTime="endTime"
+          :events="events"
+          :resourceInfos="EventCreatorData.resourceInfo"
+          :startDate="date"
+        ></EventCreator>
+    </div>
     </div>
   </div>
 </template>
@@ -137,6 +146,7 @@ export default {
   display: inline-block;
   margin-bottom: 0;
   font-weight: 400;
+  width:50%;
   text-align: center;
   white-space: nowrap;
   vertical-align: middle;
@@ -144,7 +154,7 @@ export default {
   touch-action: manipulation;
   cursor: pointer;
   background-image: none;
-  border: 1px solid transparent;
+  border: 1px solid black;
   padding: 6px 12px;
   font-size: 14px;
   line-height: 1.42857143;
@@ -165,6 +175,7 @@ export default {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
   padding: 15px;
+  margin-left: 45px;
 }
 .collumns {
   display: flex;
@@ -173,5 +184,18 @@ export default {
 /* On mouse-over, add a deeper shadow */
 .card:hover {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+.right-container{
+  display:flex;
+  flex-direction: column;
+  height: 100%;
+}
+.vertical{
+  flex-direction: column;
+  display: flex;
+}
+.buttons{
+  flex-direction: row;
+  display:flex;
 }
 </style>
