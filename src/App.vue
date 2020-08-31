@@ -54,7 +54,6 @@ import moment from "moment";
 import WeekOverview from "./components/WeekOverview.vue";
 import EventCreator from "./components/EventCreator";
 import {
-  dummyEventsForRenderTest,
   dummyEventsForEventCreator,
   dummyResourceInfoForEventCreator,
   possisionList,
@@ -67,7 +66,6 @@ export default {
   },
   data() {
     return {
-      EventsForRenderTest: dummyEventsForRenderTest,
       EventCreatorData: {
         events: dummyEventsForEventCreator,
         resourceInfo: dummyResourceInfoForEventCreator,

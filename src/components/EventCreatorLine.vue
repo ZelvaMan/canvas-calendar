@@ -16,7 +16,9 @@
         contenteditable="true"
         class="input"
       />
-      <div class="input total-hours" ref="hours"></div>
+      <div class="input total-hours" ref="total-week"></div>
+      <div class="input total-hours" ref="total-month">
+      {{totalHoursMonth}}</div>
     </div>
   </div>
 </template>
@@ -33,6 +35,8 @@ export default {
   data() {
     return {
       eventsByDay: [],
+      //contains all dates with x
+      disabledDates: []
     };
   },
   props: {
@@ -46,6 +50,7 @@ export default {
     weekDateStart: String,
     NameSize: Number,
     possisions: Array,
+    totalHoursMonth: String
   },
   watch: {
     events() {
@@ -73,7 +78,8 @@ export default {
         //set textare to that string
         textarea.innerText = str;
       });
-      this.$refs["hours"].innerText = this.totalHours.toString();
+      this.$refs["total-week"].innerText = this.totalHoursWeek.toString();
+      this.$refs["total-month"].innerText = this.totalHoursMonth
     },
     //create day string for events to be render in textareas
     createDayString(events) {
@@ -160,7 +166,12 @@ export default {
     },
     //create event
     createEvent(string, id) {
+
       var date = moment(this.weekDateStart, "YYYY/MM/DD").add(id - 1, "d");
+            if(string == "x")
+      {
+        //add date to disabled dates
+      }
       var c = string.charAt(0);
       var possision = this.resourceInfo.possision;
       if (!(c >= "0" && c <= "9")) {
@@ -283,7 +294,7 @@ export default {
   },
   computed: {
     //* return total number which this resource workde this week
-    totalHours() {
+    totalHoursWeek() {
       var result = 0;
       this.events.forEach((e) => {
         var start = moment(
@@ -302,7 +313,7 @@ export default {
         result += Math.abs(hours);
       });
       //console.log(result);
-      return result;
+      return result.toString();
     },
     //create style for resourcename
     colorStyleString() {

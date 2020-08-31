@@ -9,8 +9,14 @@
       </div>
       <div class="date-container">
         <b>
-          celkem
-          <br />hodin
+          celkem hodin
+          <br /> za týden
+        </b>
+      </div>
+       <div class="date-container">
+        <b>
+          celkem hodin
+          <br /> za měsíc
         </b>
       </div>
     </div>
@@ -26,6 +32,7 @@
       v-on:input="onInput"
       :startTime="startTime"
       :endTime="endTime"
+      :totalHoursMonth="getTotalHoursMonth(ri.id)"
     ></EventCreatorLine>
   </div>
 </template>
@@ -65,6 +72,7 @@ export default {
   },
   mounted() {},
   methods: {
+    
     onInput(e) {
       //need to fix emit so it will join with other resources
       this.$emit("input", this.eventsForEmit(e));
@@ -148,6 +156,40 @@ export default {
       }
       return events;
     },
+    getTotalHoursMonth(resourceId){
+      var total = 0;
+      var events = []
+      var month = moment(this.startDate,"YYYY/MM/DD").format("MM")
+      this.events.forEach(e => {
+        var isSameMonth = moment(e.start, "YYYY/MM/DD HH:mm").format("MM") == month
+        if(e.resource == resourceId && isSameMonth){
+          events.push(e)
+        }
+        
+      });
+      events.forEach(e => {
+
+        var start = moment(
+          moment(e.start, "YYYY/MM/DD HH:mm").format("HH:mm"),
+          "HH:mm"
+        );
+        var end = "";
+        if (e.end == "cl") {
+          end = moment(this.endTime, "HH:mm");
+        } else {
+          end = moment(e.end, "HH:mm");
+        }
+
+        var range = moment.duration(start.diff(end));
+        var hours = range.asHours();
+        total += Math.abs(hours)
+      });
+      console.log("total for month for " + resourceId)
+
+      console.log(total)
+      return total.toString();
+  
+      }
   },
   computed: {
     getNameWidth() {
@@ -155,9 +197,10 @@ export default {
         return a.name.length > b.name.length ? a : b;
       });
       return longest.name.length;
-    },
-  },
-};
+    }
+    }
+  }
+
 </script>
 <style scoped>
 .container {
