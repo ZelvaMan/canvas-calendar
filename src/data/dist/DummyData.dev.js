@@ -13,7 +13,8 @@ var dummyResourceInfoForEventCreator = [{
   color: "PURPLE",
   name: "Marek",
   id: "E",
-  possision: "BOH"
+  possision: "BOH",
+  hidden: true
 }, {
   color: "GOLD",
   name: "Lukas",
@@ -28,7 +29,8 @@ var dummyResourceInfoForEventCreator = [{
   color: "green",
   name: "Cecil",
   id: "C",
-  possision: "Uklid"
+  possision: "Uklid",
+  hidden: true
 }]; // TODO add resource dictionary
 
 exports.dummyResourceInfoForEventCreator = dummyResourceInfoForEventCreator;

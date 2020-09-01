@@ -4,7 +4,7 @@
       {{resourceInfo.name}}
       <div style="font-size: 0.6rem">({{resourceInfo.possision}})</div>
     </div>
-    <div class="input-container">
+    <div class="input-container" v-if="this.resourceInfo != undefined">
       <div
         v-for="n in parseInt(daysOfWeek, 10)"
         :key="n"
@@ -17,8 +17,7 @@
         class="input"
       />
       <div class="input total-hours" ref="total-week"></div>
-      <div class="input total-hours" ref="total-month">
-      {{totalHoursMonth}}</div>
+      <div class="input total-hours" ref="total-month">{{totalHoursMonth}}</div>
     </div>
   </div>
 </template>
@@ -36,7 +35,7 @@ export default {
     return {
       eventsByDay: [],
       //contains all dates with x
-      disabledDates: []
+      disabledDates: [],
     };
   },
   props: {
@@ -50,7 +49,7 @@ export default {
     weekDateStart: String,
     NameSize: Number,
     possisions: Array,
-    totalHoursMonth: String
+    totalHoursMonth: String,
   },
   watch: {
     events() {
@@ -79,7 +78,7 @@ export default {
         textarea.innerText = str;
       });
       this.$refs["total-week"].innerText = this.totalHoursWeek.toString();
-      this.$refs["total-month"].innerText = this.totalHoursMonth
+      this.$refs["total-month"].innerText = this.totalHoursMonth;
     },
     //create day string for events to be render in textareas
     createDayString(events) {
@@ -166,10 +165,8 @@ export default {
     },
     //create event
     createEvent(string, id) {
-
       var date = moment(this.weekDateStart, "YYYY/MM/DD").add(id - 1, "d");
-            if(string == "x")
-      {
+      if (string == "x") {
         //add date to disabled dates
       }
       var c = string.charAt(0);

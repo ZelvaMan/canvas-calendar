@@ -1,26 +1,26 @@
 <template>
   <div id="app">
-  <div class="header">
-  <h1>WeekOverview</h1>
+    <div class="header">
+      <h1>WeekOverview</h1>
 
-        <div class="buttons">
+      <div class="buttons">
         <button class="btn" v-on:click="removeWeek()">previous week</button>
         <button class="btn" v-on:click="addWeek()">next week</button>
-        </div>
-  </div>
+      </div>
+    </div>
 
     <div class="flex-container">
       <WeekOverview
-          :startTime="startTime"
-          :endTime="endTime"
-          :events="events"
-          :startDate="date"
-          :possisions="getPossisions"
-          daysOfWeek="7"
+        :startTime="startTime"
+        :endTime="endTime"
+        :events="events"
+        :startDate="date"
+        :possisions="getPossisions"
+        daysOfWeek="7"
       />
-    
-    <div class="right-container">
-     <EventCreator
+
+      <div class="right-container">
+        <EventCreator
           daysOfWeek="7"
           v-on:input="addEvent"
           :startTime="startTime"
@@ -29,40 +29,39 @@
           :resourceInfos="EventCreatorData.resourceInfo"
           :startDate="date"
         ></EventCreator>
-      <div class="info">
-        
-      <div class="card collumns">
-        <p>
-          Barvy jmen
-          odpovidaji
-          barvam car
-        </p>
-        <div style="margin-left: 20px">
-          <h3>zkratky</h3>
-          <p>
-            f == FOH
-            <br />u == Uklid
-            <br />b == BOH
-            <br />cl == zaviracka
-            <br />
-          </p>
-        
+        <div class="info">
+          <div class="card collumns">
+            <p>
+              Barvy jmen
+              odpovidaji
+              barvam car
+            </p>
+            <div style="margin-left: 20px">
+              <h3>zkratky</h3>
+              <p>
+                f == FOH
+                <br />u == Uklid
+                <br />b == BOH
+                <br />cl == zaviracka
+                <br />
+              </p>
+            </div>
+          </div>
         </div>
-         
-        
       </div>
-      </div>
-    
     </div>
-    </div>
-  
   </div>
 </template>
 
 <script>
 import moment from "moment";
+import Vue from "vue";
 import WeekOverview from "./components/WeekOverview.vue";
 import EventCreator from "./components/EventCreator";
+import Multiselect from "vue-multiselect";
+
+// register globally
+Vue.component("multiselect", Multiselect);
 import {
   dummyEventsForEventCreator,
   dummyResourceInfoForEventCreator,
@@ -164,7 +163,6 @@ export default {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  
 }
 .btn.focus,
 .btn:focus,
@@ -179,7 +177,7 @@ export default {
   padding: 5% 15px;
   margin-left: 45px;
   margin-top: 30px;
-  width:90%;
+  width: 90%;
 }
 .collumns {
   display: flex;
@@ -189,25 +187,25 @@ export default {
 .card:hover {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
-.right-container{
-  display:flex;
+.right-container {
+  display: flex;
   flex-direction: column;
   height: 100%;
-  margin-left:10px;
+  margin-left: 10px;
 }
-.vertical{
+.vertical {
   flex-direction: column;
   display: flex;
 }
-.buttons{
+.buttons {
   flex-direction: row;
-  display:flex;
-   align-items: center;
+  display: flex;
+  align-items: center;
   margin-left: 25px;
 }
-.header{
+.header {
   flex-direction: row;
-  display:flex;
-  
+  display: flex;
 }
 </style>
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>

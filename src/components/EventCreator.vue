@@ -1,7 +1,11 @@
 <template>
   <div class="container">
     <div class="dates-container">
-      <div :style="'width:' + (getNameWidth/1.7).toString()  + 'rem;'" class="white-space"></div>
+      <div :style="'width:' + (getNameWidth/1.7).toString()  + 'rem;'" class="white-space">
+        <button v-on:click="reset">
+          <i class="fa fa-undo" aria-hidden="true"></i>
+        </button>
+      </div>
       <div class="date-container" v-for="n in parseInt(daysOfWeek)" :key="n">
         {{moment(startDate).add(n -1,"d").format("MM.DD.")}}
         <br />
@@ -10,18 +14,18 @@
       <div class="date-container">
         <b>
           celkem hodin
-          <br /> za týden
+          <br />za týden
         </b>
       </div>
-       <div class="date-container">
+      <div class="date-container">
         <b>
           celkem hodin
-          <br /> za měsíc
+          <br />za měsíc
         </b>
       </div>
     </div>
     <EventCreatorLine
-      v-for="ri in resourceInfos"
+      v-for="ri in selectedResourceInfos"
       :key="ri.id"
       :events="getEventWithResource(ri.id)"
       :resourceInfo="ri"
@@ -34,6 +38,13 @@
       :endTime="endTime"
       :totalHoursMonth="getTotalHoursMonth(ri.id)"
     ></EventCreatorLine>
+    <div class="select">
+      <multiselect
+        v-model="selectSelected"
+        :options="unselectedRINames"
+        v-on:input="SelectInputHandler"
+      ></multiselect>
+    </div>
   </div>
 </template>
 
@@ -52,7 +63,11 @@ export default {
   },
   data() {
     return {
+      selectSelected: null,
+
       eventsByResource: this.groupByResource(),
+      unselectedResourceInfos: this.getDefaultHidden(),
+      selectedResourceInfos: this.getDefaultDisplayed(),
     };
   },
   props: {
@@ -72,7 +87,6 @@ export default {
   },
   mounted() {},
   methods: {
-    
     onInput(e) {
       //need to fix emit so it will join with other resources
       this.$emit("input", this.eventsForEmit(e));
@@ -156,19 +170,18 @@ export default {
       }
       return events;
     },
-    getTotalHoursMonth(resourceId){
+    getTotalHoursMonth(resourceId) {
       var total = 0;
-      var events = []
-      var month = moment(this.startDate,"YYYY/MM/DD").format("MM")
-      this.events.forEach(e => {
-        var isSameMonth = moment(e.start, "YYYY/MM/DD HH:mm").format("MM") == month
-        if(e.resource == resourceId && isSameMonth){
-          events.push(e)
+      var events = [];
+      var month = moment(this.startDate, "YYYY/MM/DD").format("MM");
+      this.events.forEach((e) => {
+        var isSameMonth =
+          moment(e.start, "YYYY/MM/DD HH:mm").format("MM") == month;
+        if (e.resource == resourceId && isSameMonth) {
+          events.push(e);
         }
-        
       });
-      events.forEach(e => {
-
+      events.forEach((e) => {
         var start = moment(
           moment(e.start, "YYYY/MM/DD HH:mm").format("HH:mm"),
           "HH:mm"
@@ -182,14 +195,66 @@ export default {
 
         var range = moment.duration(start.diff(end));
         var hours = range.asHours();
-        total += Math.abs(hours)
+        total += Math.abs(hours);
       });
-      console.log("total for month for " + resourceId)
+      console.log("total for month for " + resourceId);
 
-      console.log(total)
+      console.log(total);
       return total.toString();
-  
+    },
+    SelectInputHandler() {
+      console.log("select input name:" + this.selectSelected);
+      if (this.selectSelected == null) {
+        return;
       }
+      //add resource to visible resources
+      var ri = this.getResourcecByName(
+        this.unselectedResourceInfos,
+        this.selectSelected
+      );
+      this.selectedResourceInfos.push(ri);
+      //delete from unselected resources
+      this.unselectedResourceInfos.splice(
+        this.unselectedResourceInfos.findIndex(
+          (v) => v.name === this.selectSelected
+        ),
+        1
+      );
+      //deselct
+      this.selectSelected = null;
+    },
+    getResourcecByName(resourceInfos, name) {
+      var result;
+      resourceInfos.forEach((ri) => {
+        if (ri.name == name) {
+          result = ri;
+          return result;
+        }
+      });
+      return result;
+    },
+    getDefaultDisplayed() {
+      var displayed = [];
+      this.resourceInfos.forEach((ri) => {
+        if (!ri.hidden || ri.hidden == undefined) {
+          displayed.push(ri);
+        }
+      });
+      return displayed;
+    },
+    getDefaultHidden() {
+      var hidden = [];
+      this.resourceInfos.forEach((ri) => {
+        if (ri.hidden) {
+          hidden.push(ri);
+        }
+      });
+      return hidden;
+    },
+    reset() {
+      this.unselectedResourceInfos = this.getDefaultHidden();
+      this.selectedResourceInfos = this.getDefaultDisplayed();
+    },
   },
   computed: {
     getNameWidth() {
@@ -197,10 +262,18 @@ export default {
         return a.name.length > b.name.length ? a : b;
       });
       return longest.name.length;
-    }
-    }
-  }
-
+    },
+    unselectedRINames() {
+      var names = [];
+      this.unselectedResourceInfos.forEach((ri) => {
+        names.push(ri.name);
+      });
+      console.log(names);
+      return names;
+    },
+    //get names of undisplayed resources
+  },
+};
 </script>
 <style scoped>
 .container {
@@ -221,5 +294,9 @@ export default {
 .white-space {
   margin: 1px;
   border-left: solid transparent 5px;
+}
+.select {
+  padding: 1px;
+  width: 30%;
 }
 </style>  

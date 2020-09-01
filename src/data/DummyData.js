@@ -10,7 +10,8 @@ export const dummyResourceInfoForEventCreator = [{
     color: "PURPLE",
     name: "Marek",
     id: "E",
-    possision: "BOH"
+    possision: "BOH",
+    hidden: true
   },
   {
 
@@ -30,7 +31,8 @@ export const dummyResourceInfoForEventCreator = [{
     color: "green",
     name: "Cecil",
     id: "C",
-    possision: "Uklid"
+    possision: "Uklid",
+    hidden: true
   }
 
 
