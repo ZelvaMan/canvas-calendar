@@ -85,12 +85,14 @@ export default {
   justify-content: flex-start;
   flex-direction: row;
   width: auto;
-  height: 100%;
+  
   min-height:650px;
   flex-wrap: nowrap;
   border-style: solid;
   border-width: 2px;
   margin-right: 10px;
+  margin-bottom: 50px;
+  height: 800px;
 }
 .flex-dates-collumn {
   width: auto;

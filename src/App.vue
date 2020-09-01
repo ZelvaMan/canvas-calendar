@@ -193,6 +193,7 @@ export default {
   display:flex;
   flex-direction: column;
   height: 100%;
+  margin-left:10px;
 }
 .vertical{
   flex-direction: column;

@@ -123,7 +123,7 @@ export default {
 <style scoped>
 .resource-line {
   margin-left: 3px;
-  width: 5px;
+  width: 2px;
   height: 100%;
   display: flex;
   flex-wrap: nowrap;
