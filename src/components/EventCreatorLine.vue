@@ -425,6 +425,6 @@ export default {
   background: #c0c0c0;
 }
 .x {
-  background: #c2c1be;
+  background: #e3dddc;
 }
 </style>
