@@ -36,6 +36,7 @@ export default {
       eventsByDay: [],
       //contains all dates with x
       disabledDates: [],
+      xRefs: [],
     };
   },
   props: {
@@ -67,15 +68,32 @@ export default {
   methods: {
     // sets default texts for textaras
     setTextAreasByEvents() {
+      if (this.xRefs) {
+        this.xRefs.forEach((e) => {
+          console.log(e);
+          e.classList.remove("x");
+        });
+      }
+      this.xRefs = [];
       this.eventsGroupedByDay.forEach((d) => {
         //difference between start date an date, used to calculate textare ID
         var diff = this.daysDiff(this.weekDateStart, d.date);
         //get textarea ref based on days between date and weekDateStart
         var textarea = this.$refs[diff + 1][0];
         //get event string
-        var str = this.createDayString(d.events);
-        //set textare to that string
-        textarea.innerText = str;
+        if (textarea.innerText.toLowerCase() != "x") {
+          console.log("isnt x" + textarea.classList);
+
+          console.log(textarea.classList);
+          textarea.classList.remove("x");
+
+          var str = this.createDayString(d.events);
+          //set textare to that string
+          textarea.innerText = str;
+        } else {
+          this.xRefs.push(textarea);
+          if (!textarea.classList.contains("x")) textarea.classList.add("x");
+        }
       });
       this.$refs["total-week"].innerText = this.totalHoursWeek.toString();
       this.$refs["total-month"].innerText = this.totalHoursMonth;
@@ -123,11 +141,22 @@ export default {
     //methof fot hangeling onchange events
     onChangeHandler(target) {
       console.log("Change trigered s:" + target.innerText);
-
-      //if value is too small to be valid return
-      if (target.innerText.replace(/' '|\n/g, "").lenght < 3) {
+      if (target.innerText == "") {
+        target.classList.remove("x");
         return;
       }
+      if (target.innerText.toLowerCase() == "x") {
+        if (!target.classList.contains("x")) target.classList.add("x");
+        console.log("return");
+        return;
+      }
+      //if value is too small to be valid return
+      if (target.innerText.replace(/' '|\n/g, "").lenght < 3) {
+        target.classList.remove("x");
+        return;
+      }
+
+      console.log("not return");
       //split string by \n
       var spl = target.innerText.split("\n");
       //*if there is only one event
@@ -166,9 +195,8 @@ export default {
     //create event
     createEvent(string, id) {
       var date = moment(this.weekDateStart, "YYYY/MM/DD").add(id - 1, "d");
-      if (string == "x") {
-        //add date to disabled dates
-      }
+      //add date to disabled dates
+
       var c = string.charAt(0);
       var possision = this.resourceInfo.possision;
       if (!(c >= "0" && c <= "9")) {
@@ -395,5 +423,8 @@ export default {
 }
 .total-hours {
   background: #c0c0c0;
+}
+.x {
+  background: #c2c1be;
 }
 </style>
